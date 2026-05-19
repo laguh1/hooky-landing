@@ -323,9 +323,17 @@
       --purple-tint: rgba(140,1,94,.18);
     }
     /* Elements that use --gray-900 as a background must stay dark */
-    [data-theme="dark"] .phone        { background: #030712; }
-    [data-theme="dark"] .stats-strip  { background: #020617; }
-    [data-theme="dark"] .btn-dark     { background: #334155; }
+    [data-theme="dark"] .phone       { background: #030712; }
+    [data-theme="dark"] .stats-strip { background: #020617; }
+
+    /* Text that hardcodes white or slate — must be explicitly lightened */
+    [data-theme="dark"] .stat-num          { color: #f1f5f9; }
+    [data-theme="dark"] .btn-dark          { background: #334155; color: #f1f5f9; }
+    [data-theme="dark"] .btn-purple        { color: #f1f5f9; }
+    [data-theme="dark"] .mock-title        { color: #e2e8f0; }
+    [data-theme="dark"] .mock-num          { color: #f1f5f9; }
+    [data-theme="dark"] .mock-btn          { color: #e2e8f0; }
+    [data-theme="dark"] .mock-sub          { color: #94a3b8; }
     [data-theme="dark"] input::placeholder { color: #475569; }
 
     /* ─── Animations ──────────────────────────────────────── */
