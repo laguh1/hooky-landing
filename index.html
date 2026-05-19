@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooky — Crochet &amp; Knitting Tracker</title>
+  <meta name="description" content="Track your crochet and knitting projects, yarn stash, stitches and more. Free on Android.">
+
+  <!-- Open Graph (for sharing on Instagram, WhatsApp, Facebook) -->
+  <meta property="og:title" content="Hooky — Crochet &amp; Knitting Tracker">
+  <meta property="og:description" content="Track every piece, from first stitch to sold. Free on Android.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-image.png"><!-- replace with a real screenshot -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────── */
+    :root {
+      --purple:  #8C015E;
+      --purple-dark: #6f014b;
+      --purple-tint: #fdf2f8;
+      --slate:   #1E293B;
+      --white:   #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100:#f1f5f9;
+      --gray-200:#e2e8f0;
+      --gray-400:#94a3b8;
+      --gray-500:#64748b;
+      --gray-600:#475569;
+      --gray-900:#0f172a;
+      --radius-card: 16px;
+      --radius-btn:  12px;
+      --shadow-card: 0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    /* ─── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── Utility ────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--purple); margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 40px); font-weight: 800;
+      letter-spacing: -1px; color: var(--gray-900); line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--gray-500); line-height: 1.7;
+      max-width: 540px;
+    }
+    .centered { text-align: center; }
+    .centered .section-sub { margin: 0 auto; }
+
+    /* ─── Buttons ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 24px; border-radius: var(--radius-btn);
+      font-size: 15px; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all .18s ease; border: none;
+    }
+    .btn-dark {
+      background: var(--slate); color: var(--white);
+    }
+    .btn-dark:hover { background: var(--gray-900); transform: translateY(-1px); }
+    .btn-purple {
+      background: var(--purple); color: var(--white);
+    }
+    .btn-purple:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--purple);
+      border: 1.5px solid var(--purple);
+    }
+    .btn-outline:hover { background: var(--purple-tint); }
+
+    /* ─── Nav ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; padding: 0 24px; max-width: 1100px; margin: 0 auto;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--purple);
+      border-radius: 11px; display: flex; align-items: center;
+      justify-content: center; color: #fff; font-size: 20px;
+      font-weight: 800; line-height: 1; flex-shrink: 0;
+      letter-spacing: -2px;
+    }
+    .logo-word {
+      font-size: 20px; font-weight: 800; color: var(--slate);
+      letter-spacing: -0.5px;
+    }
+    .lang-switcher {
+      display: flex; gap: 2px;
+      background: var(--gray-100); border-radius: 9px; padding: 3px;
+    }
+    .lang-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 5px 11px; border-radius: 7px;
+      font-size: 13px; font-weight: 600;
+      color: var(--gray-500); transition: all .15s;
+      font-family: inherit;
+    }
+    .lang-btn.active {
+      background: var(--white); color: var(--slate);
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+    }
+
+    /* ─── Hero ───────────────────────────────────────────── */
+    .hero {
+      padding: 72px 24px 64px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 20px 40px; }
+      .hero-visual { order: -1; }
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--purple-tint); color: var(--purple);
+      border: 1px solid #f0abdc; border-radius: 100px;
+      padding: 5px 14px; font-size: 13px; font-weight: 500;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 62px);
+      font-weight: 800; line-height: 1.08;
+      letter-spacing: -2px; margin-bottom: 22px;
+    }
+    .hero h1 em { color: var(--purple); font-style: normal; }
+    .hero-sub {
+      font-size: 18px; color: var(--gray-500); margin-bottom: 36px;
+      max-width: 460px; line-height: 1.7;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Phone mockup */
+    .hero-visual { display: flex; justify-content: center; }
+    .phone {
+      width: 240px; height: 480px;
+      background: var(--gray-900); border-radius: 40px; padding: 10px;
+      box-shadow: 0 32px 64px rgba(0,0,0,.22), 0 8px 24px rgba(0,0,0,.12);
+      position: relative;
+    }
+    .phone::before {
+      content: ''; position: absolute;
+      top: 10px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 4px;
+      background: var(--gray-600); border-radius: 4px; z-index: 1;
+    }
+    .phone-screen {
+      background: var(--white); border-radius: 32px;
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .phone-top-bar {
+      height: 48px; background: var(--slate);
+      display: flex; align-items: center; padding: 0 14px;
+      flex-shrink: 0;
+    }
+    .phone-top-bar span {
+      font-size: 11px; font-weight: 700; color: #fff; letter-spacing: .5px;
+    }
+    .phone-dots { display: flex; gap: 6px; margin-left: auto; }
+    .phone-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.35);
+    }
+    .phone-dot.active { background: var(--purple); }
+    .phone-content {
+      flex: 1; padding: 12px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .mock-card {
+      background: var(--gray-50); border-radius: 10px; padding: 10px 12px;
+      border: 1px solid var(--gray-200);
+    }
+    .mock-card-title {
+      font-size: 10px; font-weight: 700; color: var(--slate); margin-bottom: 4px;
+    }
+    .mock-card-sub {
+      font-size: 9px; color: var(--gray-400);
+    }
+    .mock-chip {
+      display: inline-block; background: var(--purple-tint);
+      color: var(--purple); font-size: 8px; font-weight: 600;
+      padding: 2px 7px; border-radius: 100px; margin-top: 5px;
+    }
+    .mock-counter {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px;
+    }
+    .mock-btn {
+      width: 28px; height: 28px; background: var(--gray-200);
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-size: 14px; font-weight: 700;
+      color: var(--slate);
+    }
+    .mock-num {
+      font-size: 22px; font-weight: 800; color: var(--slate);
+    }
+
+    /* ─── Stats strip ────────────────────────────────────── */
+    .stats-strip {
+      background: var(--slate); padding: 28px 24px;
+    }
+    .stats-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; justify-content: space-around;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 28px; font-weight: 800; color: var(--white);
+      letter-spacing: -1px;
+    }
+    .stat-label {
+      font-size: 13px; color: var(--gray-400); margin-top: 2px;
+    }
+
+    /* ─── Features ───────────────────────────────────────── */
+    .features { padding: 88px 24px; background: var(--gray-50); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px; margin-top: 52px;
+    }
+    .feat-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-card); padding: 28px 22px;
+      box-shadow: var(--shadow-card);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .feat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.1);
+    }
+    .feat-icon { font-size: 30px; margin-bottom: 14px; }
+    .feat-title {
+      font-size: 15px; font-weight: 700; color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .feat-desc { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+
+    /* ─── Tutorial ───────────────────────────────────────── */
+    .tutorial { padding: 88px 24px; }
+    .video-wrap {
+      margin-top: 48px; position: relative;
+      padding-bottom: 56.25%; height: 0;
+      border-radius: var(--radius-card); overflow: hidden;
+      background: var(--gray-100); border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+    }
+    .video-wrap iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+    }
+    .play-circle {
+      width: 72px; height: 72px; background: var(--purple);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(140,1,94,.35);
+    }
+    .play-circle::after {
+      content: ''; width: 0; height: 0;
+      border-top: 14px solid transparent; border-bottom: 14px solid transparent;
+      border-left: 24px solid #fff; margin-left: 5px;
+    }
+    .video-soon {
+      font-size: 15px; font-weight: 500; color: var(--gray-500);
+    }
+
+    /* ─── Waitlist ───────────────────────────────────────── */
+    .waitlist {
+      padding: 88px 24px;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+    }
+    .waitlist-inner { max-width: 620px; margin: 0 auto; }
+    .iphone-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--white); color: var(--gray-600);
+      border: 1px solid var(--gray-200); border-radius: 100px;
+      padding: 5px 14px; font-size: 13px; font-weight: 500; margin-bottom: 22px;
+    }
+    .form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 540px) { .form-grid { grid-template-columns: 1fr; } }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fg.full { grid-column: 1 / -1; }
+    label {
+      font-size: 13px; font-weight: 600; color: var(--slate);
+    }
+    .opt-label {
+      font-size: 11px; font-weight: 400; color: var(--gray-400); margin-left: 4px;
+    }
+    input, select {
+      width: 100%; border: 1.5px solid var(--gray-200);
+      border-radius: 10px; padding: 11px 14px;
+      font-size: 15px; font-family: inherit;
+      color: var(--gray-900); background: var(--white);
+      outline: none; transition: border-color .15s;
+      appearance: none; -webkit-appearance: none;
+    }
+    input:focus, select:focus { border-color: var(--purple); }
+    input::placeholder { color: var(--gray-400); }
+    .field-hint { font-size: 12px; color: var(--gray-400); }
+    .form-note {
+      font-size: 13px; color: var(--gray-400); margin-bottom: 14px;
+    }
+    .btn-submit {
+      width: 100%; padding: 16px;
+      font-size: 16px; font-weight: 700; font-family: inherit;
+      background: var(--purple); color: #fff;
+      border: none; border-radius: var(--radius-btn); cursor: pointer;
+      transition: all .18s;
+    }
+    .btn-submit:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+    /* Success state */
+    #form-success {
+      display: none; text-align: center; padding: 48px 20px;
+    }
+    #form-success.show { display: block; }
+    .success-icon { font-size: 52px; margin-bottom: 16px; }
+    .success-title {
+      font-size: 24px; font-weight: 800; color: var(--gray-900);
+      margin-bottom: 10px;
+    }
+    .success-sub { font-size: 16px; color: var(--gray-500); margin-bottom: 28px; }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    footer {
+      padding: 48px 24px; text-align: center;
+      border-top: 1px solid var(--gray-200);
+    }
+    .footer-logo {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    }
+    .footer-logo .logo-mark { width: 30px; height: 30px; font-size: 15px; border-radius: 8px; }
+    .footer-logo .logo-word { font-size: 17px; }
+    .footer-text { font-size: 14px; color: var(--gray-400); }
+    .footer-text + .footer-text { margin-top: 4px; }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .stats-inner { gap: 16px; }
+      .stat-num { font-size: 22px; }
+    }
+
+    /* ─── Animations ─────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeUp .5s ease both; }
+    .fade-in-2 { animation: fadeUp .5s .1s ease both; }
+    .fade-in-3 { animation: fadeUp .5s .2s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- ─── Nav ──────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">∞</div>
+      <span class="logo-word">Hooky</span>
+    </a>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn active" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn" onclick="setLang('es')" aria-label="Español">ES</button>
+      <button class="lang-btn" onclick="setLang('pt')" aria-label="Português">PT</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Hero ─────────────────────────────────────────────── -->
+<section>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge fade-in">
+        🤖 <span data-i18n="badge">Free on Android</span>
+      </div>
+      <h1 class="fade-in-2" data-i18n-html="hero_title">
+        Track every stitch.<br><em>From first row to sold.</em>
+      </h1>
+      <p class="hero-sub fade-in-3" data-i18n="hero_sub">
+        The crochet &amp; knitting app for makers who take their craft seriously. Pieces, yarn stash, stitches — all in one place.
+      </p>
+      <div class="hero-ctas fade-in-3">
+        <!-- ⬇ Replace PLAY_STORE_URL with your Google Play link when published -->
+        <a href="PLAY_STORE_URL" class="btn btn-dark" id="android-cta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3.18 23.76a2.5 2.5 0 0 0 2.48-.16l11.4-6.58-2.58-2.58L3.18 23.76zM21.27 9.85l-2.93-1.69-2.88 2.84 2.88 2.84 2.95-1.7a1.5 1.5 0 0 0 0-2.29zM1.23 1.37A1.5 1.5 0 0 0 1 2.26v19.48a1.5 1.5 0 0 0 .23.89l.1.1L13.03 11v-.27L1.33 1.27l-.1.1zM5.66.4l11.4 6.58-2.58 2.58L5.66.4z"/>
+          </svg>
+          <span data-i18n="cta_android">Download for Android</span>
+        </a>
+        <button class="btn btn-outline" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+          <span data-i18n="cta_iphone">📱 iPhone? Join waitlist</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="hero-visual fade-in-2">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-top-bar">
+            <span>Hooky</span>
+            <div class="phone-dots">
+              <div class="phone-dot active"></div>
+              <div class="phone-dot"></div>
+              <div class="phone-dot"></div>
+            </div>
+          </div>
+          <div class="phone-content">
+            <div class="mock-card">
+              <div class="mock-card-title" data-i18n="mock_piece">Summer Shawl</div>
+              <div class="mock-card-sub">In Progress · 14h 30min</div>
+              <div class="mock-chip" data-i18n="mock_status">In progress</div>
+            </div>
+            <div class="mock-card" style="display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div class="mock-card-title" data-i18n="mock_yarn">Yarn stash</div>
+                <div class="mock-card-sub">12 skeins · 3 brands</div>
+              </div>
+              <span style="font-size:20px">🎨</span>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-title" data-i18n="mock_counter">Row counter</div>
+              <div class="mock-counter" style="padding:4px 0 0">
+                <div class="mock-btn">−</div>
+                <div class="mock-num">47</div>
+                <div class="mock-btn">+</div>
+              </div>
+            </div>
+            <div class="mock-card" style="display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div class="mock-card-title" data-i18n="mock_profit">Profit</div>
+                <div class="mock-card-sub">€28.50 materials → €65.00</div>
+              </div>
+              <span style="font-size:11px;font-weight:700;color:#8C015E">+€36.50</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Stats strip ───────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label" data-i18n="stat1">entity types tracked</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label" data-i18n="stat2">languages — EN, ES, PT-BR</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label" data-i18n="stat3">offline, no account needed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Free</div>
+      <div class="stat-label" data-i18n="stat4">core features, always</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Features ─────────────────────────────────────────── -->
+<section class="features">
+  <div class="container centered">
+    <p class="section-label" data-i18n="feat_label">Features</p>
+    <h2 class="section-title" data-i18n="feat_title">Everything your craft needs</h2>
+    <p class="section-sub" data-i18n="feat_sub">Built by a crocheter, for crocheters. No bloat, no login, no subscription to use the basics.</p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🧶</div>
+        <div class="feat-title" data-i18n="f1_title">Project tracker</div>
+        <div class="feat-desc" data-i18n="f1_desc">Track every piece from cast-on to finished — status, dimensions, photos, and sale info all in one place.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎨</div>
+        <div class="feat-title" data-i18n="f2_title">Yarn stash</div>
+        <div class="feat-desc" data-i18n="f2_desc">Know exactly what yarn you have, how much, and where you bought it. No more mystery skeins.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📖</div>
+        <div class="feat-title" data-i18n="f3_title">Stitch library</div>
+        <div class="feat-desc" data-i18n="f3_desc">Save your favourite stitches with tutorial links, chart uploads, photos and difficulty ratings.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔢</div>
+        <div class="feat-title" data-i18n="f4_title">Row counter</div>
+        <div class="feat-desc" data-i18n="f4_desc">Tap, speak or type. Voice mode counts hands-free so your eyes never leave your work.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⏱️</div>
+        <div class="feat-title" data-i18n="f5_title">Work timer</div>
+        <div class="feat-desc" data-i18n="f5_desc">Log every minute automatically. Pause, resume and stop — hours feed straight into the price calculator.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💰</div>
+        <div class="feat-title" data-i18n="f6_title">Cost &amp; profit</div>
+        <div class="feat-desc" data-i18n="f6_desc">See material costs, labour and profit margin per piece. Know exactly what your work is worth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Tutorial ──────────────────────────────────────────── -->
+<section class="tutorial">
+  <div class="container centered">
+    <p class="section-label" data-i18n="tut_label">Tutorial</p>
+    <h2 class="section-title" data-i18n="tut_title">See Hooky in action</h2>
+    <p class="section-sub" data-i18n="tut_sub">Watch how crafters use Hooky to stay organized and price their work with confidence.</p>
+  </div>
+  <div class="container" style="margin-top:48px;max-width:800px">
+    <div class="video-wrap">
+      <!--
+        WHEN YOUR YOUTUBE VIDEO IS READY:
+        1. Delete the <div class="video-placeholder"> block below
+        2. Uncomment and paste your video ID:
+
+        <iframe
+          src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+          title="Hooky tutorial"
+          allowfullscreen>
+        </iframe>
+      -->
+      <div class="video-placeholder">
+        <div class="play-circle"></div>
+        <p class="video-soon" data-i18n="tut_soon">Tutorial video coming soon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Waitlist ──────────────────────────────────────────── -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-inner">
+    <div class="iphone-badge">🍎 <span data-i18n="wl_badge">Coming to iPhone</span></div>
+    <h2 class="section-title" data-i18n="wl_title">Join the iOS waitlist</h2>
+    <p class="section-sub" style="margin-bottom:36px" data-i18n="wl_sub">We're building the iPhone version. Leave your details and you'll be the first to know when it launches.</p>
+
+    <div id="form-wrap">
+      <!--
+        FORM SETUP (one-time, 5 min):
+        1. Go to formspree.io → Create free account → New form
+        2. Copy your form ID (looks like: xrgnvwkp)
+        3. Replace YOUR_FORMSPREE_ID below with it
+        Data lands in your email + a Formspree dashboard you can export to CSV.
+      -->
+      <form id="waitlist-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <input type="hidden" name="_subject" value="Hooky iOS Waitlist">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="form-grid">
+          <div class="fg">
+            <label for="f-name" data-i18n="fl_name">First name</label>
+            <input id="f-name" type="text" name="name" required autocomplete="given-name" placeholder="Maria">
+          </div>
+          <div class="fg">
+            <label for="f-country" data-i18n="fl_country">Country</label>
+            <select id="f-country" name="country" required>
+              <option value="" data-i18n="fl_country_ph">Select...</option>
+              <option value="Brazil">🇧🇷 Brazil / Brasil</option>
+              <option value="Spain">🇪🇸 Spain / España</option>
+              <option value="Mexico">🇲🇽 Mexico / México</option>
+              <option value="Argentina">🇦🇷 Argentina</option>
+              <option value="Colombia">🇨🇴 Colombia</option>
+              <option value="Chile">🇨🇱 Chile</option>
+              <option value="Peru">🇵🇪 Peru / Perú</option>
+              <option value="Venezuela">🇻🇪 Venezuela</option>
+              <option value="Ecuador">🇪🇨 Ecuador</option>
+              <option value="Bolivia">🇧🇴 Bolivia</option>
+              <option value="Uruguay">🇺🇾 Uruguay</option>
+              <option value="Paraguay">🇵🇾 Paraguay</option>
+              <option value="Portugal">🇵🇹 Portugal</option>
+              <option value="Other" data-i18n="fl_other">Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="f-wa" data-i18n="fl_whatsapp">WhatsApp <span class="opt-label" data-i18n="fl_opt">(optional)</span></label>
+            <input id="f-wa" type="tel" name="whatsapp" autocomplete="tel" placeholder="+55 11 9 9999-9999">
+            <span class="field-hint" data-i18n="fl_wa_hint">Include country code</span>
+          </div>
+          <div class="fg">
+            <label for="f-email" data-i18n="fl_email">Email <span class="opt-label" data-i18n="fl_opt">(optional)</span></label>
+            <input id="f-email" type="email" name="email" autocomplete="email" placeholder="maria@email.com">
+          </div>
+          <div class="fg">
+            <label for="f-ig" data-i18n="fl_ig">Instagram <span class="opt-label" data-i18n="fl_opt">(optional)</span></label>
+            <input id="f-ig" type="text" name="instagram" placeholder="@yourusername">
+          </div>
+          <div class="fg">
+            <label for="f-fb" data-i18n="fl_fb">Facebook <span class="opt-label" data-i18n="fl_opt">(optional)</span></label>
+            <input id="f-fb" type="text" name="facebook" placeholder="facebook.com/you">
+          </div>
+          <div class="fg full">
+            <label for="f-src" data-i18n="fl_source">How did you find Hooky?</label>
+            <select id="f-src" name="source">
+              <option value="" data-i18n="fl_src_ph">Select one...</option>
+              <option value="Instagram" data-i18n="fl_src_ig">Instagram</option>
+              <option value="Facebook group" data-i18n="fl_src_fb">Facebook group</option>
+              <option value="Friend" data-i18n="fl_src_friend">A friend told me</option>
+              <option value="Google" data-i18n="fl_src_google">Google search</option>
+              <option value="YouTube" data-i18n="fl_src_yt">YouTube</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Other" data-i18n="fl_src_other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="form-note" data-i18n="fl_note">
+          At least one contact (WhatsApp, email, Instagram or Facebook) is required.
+        </p>
+        <button type="submit" class="btn-submit" data-i18n="fl_submit">
+          Join the waitlist →
+        </button>
+      </form>
+    </div>
+
+    <div id="form-success">
+      <div class="success-icon">🎉</div>
+      <h3 class="success-title" data-i18n="suc_title">You're on the list!</h3>
+      <p class="success-sub" data-i18n="suc_sub">We'll reach out as soon as Hooky lands on iOS. In the meantime — try the Android version!</p>
+      <a href="PLAY_STORE_URL" class="btn btn-purple" data-i18n="suc_cta">Download for Android</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ────────────────────────────────────────────── -->
+<footer>
+  <a href="#" class="footer-logo">
+    <div class="logo-mark">∞</div>
+    <span class="logo-word">Hooky</span>
+  </a>
+  <p class="footer-text" data-i18n="foot_made">Made with ♥ for crafters everywhere</p>
+  <p class="footer-text" style="margin-top:6px">© 2026 Hooky</p>
+</footer>
+
+<script>
+/* ─── Translations ────────────────────────────────────────── */
+const T = {
+  en: {
+    badge: "Free on Android",
+    hero_title: "Track every stitch.<br><em>From first row to sold.</em>",
+    hero_sub: "The crochet & knitting app for makers who take their craft seriously. Pieces, yarn stash, stitches — all in one place.",
+    cta_android: "Download for Android",
+    cta_iphone: "📱 iPhone? Join waitlist",
+    mock_piece: "Summer Shawl", mock_status: "In progress",
+    mock_yarn: "Yarn stash", mock_counter: "Row counter", mock_profit: "Profit",
+    stat1: "entity types tracked", stat2: "languages — EN, ES, PT-BR",
+    stat3: "offline, no account needed", stat4: "core features, always",
+    feat_label: "Features",
+    feat_title: "Everything your craft needs",
+    feat_sub: "Built by a crocheter, for crocheters. No bloat, no login, no subscription to use the basics.",
+    f1_title: "Project tracker",
+    f1_desc: "Track every piece from cast-on to finished — status, dimensions, photos, and sale info all in one place.",
+    f2_title: "Yarn stash",
+    f2_desc: "Know exactly what yarn you have, how much, and where you bought it. No more mystery skeins.",
+    f3_title: "Stitch library",
+    f3_desc: "Save your favourite stitches with tutorial links, chart uploads, photos and difficulty ratings.",
+    f4_title: "Row counter",
+    f4_desc: "Tap, speak or type. Voice mode counts hands-free so your eyes never leave your work.",
+    f5_title: "Work timer",
+    f5_desc: "Log every minute automatically. Pause, resume and stop — hours feed straight into the price calculator.",
+    f6_title: "Cost & profit",
+    f6_desc: "See material costs, labour and profit margin per piece. Know exactly what your work is worth.",
+    tut_label: "Tutorial", tut_title: "See Hooky in action",
+    tut_sub: "Watch how crafters use Hooky to stay organized and price their work with confidence.",
+    tut_soon: "Tutorial video coming soon",
+    wl_badge: "Coming to iPhone",
+    wl_title: "Join the iOS waitlist",
+    wl_sub: "We're building the iPhone version. Leave your details and you'll be the first to know when it launches.",
+    fl_name: "First name", fl_country: "Country", fl_country_ph: "Select...",
+    fl_whatsapp: "WhatsApp", fl_opt: "(optional)", fl_wa_hint: "Include country code",
+    fl_email: "Email", fl_ig: "Instagram", fl_fb: "Facebook",
+    fl_source: "How did you find Hooky?", fl_src_ph: "Select one...",
+    fl_src_ig: "Instagram", fl_src_fb: "Facebook group",
+    fl_src_friend: "A friend told me", fl_src_google: "Google search",
+    fl_src_yt: "YouTube", fl_src_other: "Other", fl_other: "Other",
+    fl_note: "At least one contact (WhatsApp, email, Instagram or Facebook) is required.",
+    fl_submit: "Join the waitlist →",
+    suc_title: "You're on the list!",
+    suc_sub: "We'll reach out as soon as Hooky lands on iOS. In the meantime — try the Android version!",
+    suc_cta: "Download for Android",
+    foot_made: "Made with ♥ for crafters everywhere",
+  },
+  es: {
+    badge: "Gratis en Android",
+    hero_title: "Registra cada punto.<br><em>De la primera vuelta a la venta.</em>",
+    hero_sub: "La app de crochet y tejido para quienes se toman en serio su oficio. Proyectos, lanas, puntos — todo en un solo lugar.",
+    cta_android: "Descargar para Android",
+    cta_iphone: "📱 ¿iPhone? Únete a la lista",
+    mock_piece: "Chal de verano", mock_status: "En progreso",
+    mock_yarn: "Inventario de lanas", mock_counter: "Contador de vueltas", mock_profit: "Beneficio",
+    stat1: "tipos de entidades registradas", stat2: "idiomas — EN, ES, PT-BR",
+    stat3: "sin conexión, sin cuenta", stat4: "funciones básicas, siempre gratis",
+    feat_label: "Funciones",
+    feat_title: "Todo lo que tu artesanía necesita",
+    feat_sub: "Creada por una ganchillera, para ganchilleras. Sin complicaciones, sin cuenta, sin suscripción para lo básico.",
+    f1_title: "Seguimiento de proyectos",
+    f1_desc: "Registra cada pieza desde el inicio hasta terminada — estado, dimensiones, fotos e información de venta.",
+    f2_title: "Inventario de lanas",
+    f2_desc: "Sabe exactamente qué lana tienes, cuánta y dónde la compraste. Sin más madejas misteriosas.",
+    f3_title: "Biblioteca de puntos",
+    f3_desc: "Guarda tus puntos favoritos con enlaces a tutoriales, fotos de diagramas y nivel de dificultad.",
+    f4_title: "Contador de vueltas",
+    f4_desc: "Toca, habla o escribe. El modo de voz cuenta con las manos libres para no apartar los ojos de tu labor.",
+    f5_title: "Temporizador de trabajo",
+    f5_desc: "Registra cada minuto automáticamente. Pausa, continúa y para — las horas van directo a la calculadora de precios.",
+    f6_title: "Costes y beneficios",
+    f6_desc: "Ve el coste de materiales, la mano de obra y el margen de beneficio por pieza. Sabe lo que realmente vale tu trabajo.",
+    tut_label: "Tutorial", tut_title: "Hooky en acción",
+    tut_sub: "Mira cómo las artesanas usan Hooky para organizarse y calcular el precio de su trabajo con confianza.",
+    tut_soon: "Vídeo tutorial próximamente",
+    wl_badge: "Próximamente en iPhone",
+    wl_title: "Únete a la lista de espera para iOS",
+    wl_sub: "Estamos desarrollando la versión para iPhone. Deja tus datos y serás la primera en saber cuándo se lanza.",
+    fl_name: "Nombre", fl_country: "País", fl_country_ph: "Seleccionar...",
+    fl_whatsapp: "WhatsApp", fl_opt: "(opcional)", fl_wa_hint: "Incluye el código de país",
+    fl_email: "Correo electrónico", fl_ig: "Instagram", fl_fb: "Facebook",
+    fl_source: "¿Cómo conociste Hooky?", fl_src_ph: "Selecciona una opción...",
+    fl_src_ig: "Instagram", fl_src_fb: "Grupo de Facebook",
+    fl_src_friend: "Un amigo/a me lo contó", fl_src_google: "Búsqueda en Google",
+    fl_src_yt: "YouTube", fl_src_other: "Otro", fl_other: "Otro",
+    fl_note: "Se requiere al menos un contacto (WhatsApp, correo, Instagram o Facebook).",
+    fl_submit: "Unirme a la lista de espera →",
+    suc_title: "¡Ya estás en la lista!",
+    suc_sub: "Te avisaremos en cuanto Hooky llegue a iOS. Mientras tanto, ¡prueba la versión para Android!",
+    suc_cta: "Descargar para Android",
+    foot_made: "Hecho con ♥ para artesanas de todo el mundo",
+  },
+  pt: {
+    badge: "Grátis no Android",
+    hero_title: "Registre cada ponto.<br><em>Da primeira fileira à venda.</em>",
+    hero_sub: "O app de crochê e tricô para quem leva o artesanato a sério. Peças, fios, pontos — tudo em um só lugar.",
+    cta_android: "Baixar para Android",
+    cta_iphone: "📱 iPhone? Entre na lista",
+    mock_piece: "Xale de verão", mock_status: "Em progresso",
+    mock_yarn: "Estoque de fios", mock_counter: "Contador de fileiras", mock_profit: "Lucro",
+    stat1: "tipos de itens rastreados", stat2: "idiomas — EN, ES, PT-BR",
+    stat3: "offline, sem cadastro", stat4: "funcionalidades básicas, sempre grátis",
+    feat_label: "Funcionalidades",
+    feat_title: "Tudo que o seu artesanato precisa",
+    feat_sub: "Criado por uma crocheter, para crocheters. Sem enrolação, sem cadastro, sem assinatura para o básico.",
+    f1_title: "Rastreador de projetos",
+    f1_desc: "Registre cada peça do início ao fim — status, medidas, fotos e informações de venda em um só lugar.",
+    f2_title: "Estoque de fios",
+    f2_desc: "Saiba exatamente quais fios você tem, quanto e onde comprou. Chega de meadas misteriosas.",
+    f3_title: "Biblioteca de pontos",
+    f3_desc: "Salve seus pontos favoritos com links para tutoriais, fotos de esquemas e nível de dificuldade.",
+    f4_title: "Contador de fileiras",
+    f4_desc: "Toque, fale ou digite. O modo de voz conta sem usar as mãos para você não tirar os olhos do trabalho.",
+    f5_title: "Cronômetro de trabalho",
+    f5_desc: "Registre cada minuto automaticamente. Pausar, retomar e parar — as horas vão direto para a calculadora de preços.",
+    f6_title: "Custos e lucros",
+    f6_desc: "Veja o custo de materiais, a mão de obra e a margem de lucro por peça. Saiba o valor real do seu trabalho.",
+    tut_label: "Tutorial", tut_title: "Hooky em ação",
+    tut_sub: "Veja como artesãs usam o Hooky para se organizar e precificar o trabalho com confiança.",
+    tut_soon: "Vídeo tutorial em breve",
+    wl_badge: "Em breve no iPhone",
+    wl_title: "Entre na lista de espera para iOS",
+    wl_sub: "Estamos desenvolvendo a versão para iPhone. Deixe seus dados e você será uma das primeiras a saber quando lançar.",
+    fl_name: "Nome", fl_country: "País", fl_country_ph: "Selecionar...",
+    fl_whatsapp: "WhatsApp", fl_opt: "(opcional)", fl_wa_hint: "Inclua o código do país",
+    fl_email: "E-mail", fl_ig: "Instagram", fl_fb: "Facebook",
+    fl_source: "Como você conheceu o Hooky?", fl_src_ph: "Selecione uma opção...",
+    fl_src_ig: "Instagram", fl_src_fb: "Grupo do Facebook",
+    fl_src_friend: "Um amigo me indicou", fl_src_google: "Pesquisa no Google",
+    fl_src_yt: "YouTube", fl_src_other: "Outro", fl_other: "Outro",
+    fl_note: "Pelo menos um contato (WhatsApp, e-mail, Instagram ou Facebook) é obrigatório.",
+    fl_submit: "Entrar na lista de espera →",
+    suc_title: "Você está na lista!",
+    suc_sub: "Avisaremos assim que o Hooky chegar ao iOS. Enquanto isso — experimente a versão para Android!",
+    suc_cta: "Baixar para Android",
+    foot_made: "Feito com ♥ para artesãs do mundo todo",
+  }
+};
+
+/* ─── Language engine ────────────────────────────────────── */
+let lang = 'en';
+
+function detectLang() {
+  const saved = localStorage.getItem('hooky_lang');
+  if (saved && T[saved]) return saved;
+  const nav = (navigator.language || 'en').toLowerCase();
+  if (nav.startsWith('pt')) return 'pt';
+  if (nav.startsWith('es')) return 'es';
+  return 'en';
+}
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('hooky_lang', l);
+  document.documentElement.lang = l === 'pt' ? 'pt-BR' : l;
+
+  const t = T[l];
+
+  // Plain text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+
+  // HTML nodes (hero title with <em> tag)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const k = el.getAttribute('data-i18n-html');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+
+  // Page title
+  const titles = { en: 'Hooky — Crochet & Knitting Tracker', es: 'Hooky — App de Crochet y Tejido', pt: 'Hooky — App de Crochê e Tricô' };
+  document.title = titles[l];
+
+  // Active button
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === l.toUpperCase());
+  });
+}
+
+/* ─── Form submission ────────────────────────────────────── */
+document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+
+  // Require at least one contact
+  const fields = ['whatsapp', 'email', 'instagram', 'facebook'];
+  const hasContact = fields.some(f => form[f] && form[f].value.trim());
+  if (!hasContact) {
+    alert(T[lang].fl_note);
+    return;
+  }
+
+  const btn = form.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    });
+    if (!res.ok) throw new Error();
+    document.getElementById('form-wrap').style.display = 'none';
+    const success = document.getElementById('form-success');
+    success.classList.add('show');
+    // Translate success state
+    ['suc_title', 'suc_sub', 'suc_cta'].forEach(k => {
+      const el = success.querySelector(`[data-i18n="${k}"]`);
+      if (el) el.textContent = T[lang][k];
+    });
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch {
+    btn.disabled = false;
+    btn.textContent = T[lang].fl_submit;
+    const msg = { en: 'Something went wrong. Please try again.', es: 'Algo salió mal. Inténtalo de nuevo.', pt: 'Algo deu errado. Tente novamente.' };
+    alert(msg[lang]);
+  }
+});
+
+/* ─── Init ───────────────────────────────────────────────── */
+setLang(detectLang());
+</script>
+</body>
+</html>
