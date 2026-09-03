@@ -165,8 +165,14 @@
     [data-theme="dark"] .callout-title { color: #f9a8d4; }
 
     /* ─── Form ────────────────────────────────────────────── */
-    .signup { padding: 0 24px 88px; }
+    .signup { padding: 8px 24px 88px; }
     .signup-inner { max-width: 480px; margin: 0 auto; text-align: center; }
+    .trust-anchor {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--purple);
+      margin-bottom: 24px; text-decoration: underline; text-underline-offset: 2px;
+    }
+    .trust-anchor:hover { color: var(--purple-dark); }
     .fg { display: flex; flex-direction: column; gap: 5px; text-align: left; margin-bottom: 16px; }
     label { font-size: 13px; font-weight: 600; color: var(--slate); }
     input {
@@ -248,7 +254,44 @@
   </div>
 </section>
 
-<section class="proof">
+<section class="signup">
+  <div class="signup-inner">
+    <a href="#proof" class="trust-anchor" data-i18n="ea_trust_anchor">🔒 Official Google Play Early Access program — see proof below ↓</a>
+
+    <div class="callout">
+      <div class="callout-title" data-i18n="ea_callout_title">🎁 Free 1-year Premium for early testers</div>
+      <div class="callout-text" data-i18n="ea_callout_text">Anyone who installs Hooky before 30 September 2026 automatically gets a full year of Hooky Premium, free — locked in for you even after the offer ends. It happens on its own once you install; no extra steps needed.</div>
+    </div>
+
+    <div id="form-wrap">
+      <p class="section-label" data-i18n="ea_form_label">Request access</p>
+      <h2 class="section-title" style="font-size:26px" data-i18n="ea_form_title">Not on the list yet?</h2>
+      <p class="section-sub" style="margin-bottom:24px" data-i18n="ea_form_sub">Enter the Gmail address you use for Google Play and we'll add you as a tester.</p>
+      <form id="tester-form">
+        <div class="fg">
+          <label for="t-email" data-i18n="ea_form_email_label">Your Google Play Gmail address</label>
+          <input id="t-email" name="email" type="email" required autocomplete="email" placeholder="maria@gmail.com">
+        </div>
+        <input type="hidden" name="_subject" value="Hooky — new early access request">
+        <input type="hidden" name="form_type" value="early_access_request">
+        <button type="submit" class="btn-submit" data-i18n="ea_form_submit">Request early access →</button>
+        <p class="form-note" data-i18n="ea_form_note">We'll only use this to add you to Hooky's private testing list on Google Play. No spam, ever.</p>
+      </form>
+    </div>
+
+    <div id="form-success">
+      <div class="success-icon">🎉</div>
+      <h3 class="success-title" data-i18n="ea_suc_title">Request received!</h3>
+      <p class="success-sub" data-i18n="ea_suc_sub">We'll add you within 24 hours. Come back and tap the button below once you've been added.</p>
+    </div>
+
+    <div class="divider" data-i18n="ea_divider">already invited</div>
+
+    <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="btn btn-purple" style="width:100%;justify-content:center" data-i18n="ea_join_cta">Join as a tester →</a>
+  </div>
+</section>
+
+<section class="proof" id="proof">
   <div class="proof-inner">
     <div>
       <div class="proof-img"><img src="assets/play-store-early-access.jpg" alt="Hooky's official Early Access listing on Google Play"></div>
@@ -300,41 +343,6 @@
   </div>
 </section>
 
-<section class="signup">
-  <div class="signup-inner">
-    <div class="callout">
-      <div class="callout-title" data-i18n="ea_callout_title">🎁 Free 1-year Premium for early testers</div>
-      <div class="callout-text" data-i18n="ea_callout_text">Anyone who installs Hooky before 30 September 2026 automatically gets a full year of Hooky Premium, free — locked in for you even after the offer ends. It happens on its own once you install; no extra steps needed.</div>
-    </div>
-
-    <div id="form-wrap">
-      <p class="section-label" data-i18n="ea_form_label">Request access</p>
-      <h2 class="section-title" style="font-size:26px" data-i18n="ea_form_title">Not on the list yet?</h2>
-      <p class="section-sub" style="margin-bottom:24px" data-i18n="ea_form_sub">Enter the Gmail address you use for Google Play and we'll add you as a tester.</p>
-      <form id="tester-form">
-        <div class="fg">
-          <label for="t-email" data-i18n="ea_form_email_label">Your Google Play Gmail address</label>
-          <input id="t-email" name="email" type="email" required autocomplete="email" placeholder="maria@gmail.com">
-        </div>
-        <input type="hidden" name="_subject" value="Hooky — new early access request">
-        <input type="hidden" name="form_type" value="early_access_request">
-        <button type="submit" class="btn-submit" data-i18n="ea_form_submit">Request early access →</button>
-        <p class="form-note" data-i18n="ea_form_note">We'll only use this to add you to Hooky's private testing list on Google Play. No spam, ever.</p>
-      </form>
-    </div>
-
-    <div id="form-success">
-      <div class="success-icon">🎉</div>
-      <h3 class="success-title" data-i18n="ea_suc_title">Request received!</h3>
-      <p class="success-sub" data-i18n="ea_suc_sub">We'll add you within 24 hours. Come back and tap the button below once you've been added.</p>
-    </div>
-
-    <div class="divider" data-i18n="ea_divider">already invited</div>
-
-    <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="btn btn-purple" style="width:100%;justify-content:center" data-i18n="ea_join_cta">Join as a tester →</a>
-  </div>
-</section>
-
 <footer>
   <svg class="footer-wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 437.6557 232.85081" aria-label="Hooky">
     <g transform="translate(-32.551156,-133.17192)">
@@ -368,6 +376,7 @@ function toggleTheme() {
 const T = {
   en: {
     ea_badge:"Private Early Access",
+    ea_trust_anchor:"🔒 Official Google Play Early Access program — see proof below ↓",
     ea_title:"Get early access to Hooky",
     ea_sub:"Hooky is currently in Google Play's official Early Access program — not open to everyone yet. Here's exactly how to join, step by step.",
     ea_proof_caption:"A real tester's screen",
@@ -393,6 +402,7 @@ const T = {
   },
   es: {
     ea_badge:"Acceso anticipado privado",
+    ea_trust_anchor:"🔒 Programa oficial de Acceso Anticipado de Google Play — ver la prueba abajo ↓",
     ea_title:"Consigue acceso anticipado a Hooky",
     ea_sub:"Hooky está actualmente en el programa oficial de Acceso Anticipado de Google Play — todavía no está abierto a todo el mundo. Así es exactamente cómo unirte, paso a paso.",
     ea_proof_caption:"La pantalla real de un tester",
@@ -418,6 +428,7 @@ const T = {
   },
   pt: {
     ea_badge:"Acesso antecipado privado",
+    ea_trust_anchor:"🔒 Programa oficial de Acesso Antecipado do Google Play — ver a prova abaixo ↓",
     ea_title:"Tenha acesso antecipado ao Hooky",
     ea_sub:"O Hooky está atualmente no programa oficial de Acesso Antecipado do Google Play — ainda não está aberto para todos. Veja exatamente como entrar, passo a passo.",
     ea_proof_caption:"A tela real de um tester",
