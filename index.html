@@ -323,15 +323,16 @@
     .fg.full { grid-column: 1 / -1; }
     label { font-size: 13px; font-weight: 600; color: var(--slate); }
     .opt { font-size: 11px; font-weight: 400; color: var(--gray-400); margin-left: 3px; }
-    input, select {
+    input, select, textarea {
       width: 100%; border: 1.5px solid var(--gray-200); border-radius: 10px;
       padding: 11px 14px; font-size: 15px; font-family: 'Inter', sans-serif;
       color: var(--gray-900); background: var(--white);
       outline: none; transition: border-color .15s;
       appearance: none; -webkit-appearance: none;
     }
-    input:focus, select:focus { border-color: var(--purple); }
-    input::placeholder { color: var(--gray-400); }
+    textarea { resize: vertical; min-height: 110px; }
+    input:focus, select:focus, textarea:focus { border-color: var(--purple); }
+    input::placeholder, textarea::placeholder { color: var(--gray-400); }
     .field-hint { font-size: 12px; color: var(--gray-400); }
     .form-note { font-size: 13px; color: var(--gray-400); margin-bottom: 14px; }
     .btn-submit {
@@ -345,6 +346,8 @@
 
     #form-success { display: none; text-align: center; padding: 48px 20px; }
     #form-success.show { display: block; }
+    #contact-form-success { display: none; text-align: center; padding: 48px 20px; }
+    #contact-form-success.show { display: block; }
     .success-icon { font-size: 52px; margin-bottom: 16px; }
     .success-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; }
     .success-sub { font-size: 16px; color: var(--gray-500); margin-bottom: 28px; }
@@ -743,6 +746,42 @@
   </div>
 </section>
 
+<!-- ─── Contact ───────────────────────────────────────────── -->
+<section class="waitlist" id="contact">
+  <div class="waitlist-inner">
+    <p class="section-label" data-i18n="contact_label">Get in touch</p>
+    <h2 class="section-title" data-i18n="contact_title">Questions or feedback?</h2>
+    <p class="section-sub" style="margin-bottom:36px" data-i18n="contact_sub">We'd love to hear from you — bug reports, feature ideas, or anything else on your mind.</p>
+
+    <div id="contact-form-wrap">
+      <!-- Submits via FormSubmit.co to hooky.crochet.app@gmail.com — see docs/PROMOTION.md -->
+      <form id="contact-form">
+        <input type="hidden" name="_subject" value="Hooky — new contact form message">
+        <input type="hidden" name="form_type" value="contact">
+        <div class="fg" style="margin-bottom:16px">
+          <label for="c-name" data-i18n="contact_name">Name <span class="opt" data-i18n="fl_opt">(optional)</span></label>
+          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Maria">
+        </div>
+        <div class="fg" style="margin-bottom:16px">
+          <label for="c-email" data-i18n="contact_email">Your email</label>
+          <input id="c-email" name="email" type="email" required autocomplete="email" placeholder="maria@email.com">
+        </div>
+        <div class="fg" style="margin-bottom:16px">
+          <label for="c-message" data-i18n="contact_message">Message</label>
+          <textarea id="c-message" name="message" required rows="5" placeholder="..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" data-i18n="contact_submit">Send message →</button>
+      </form>
+    </div>
+
+    <div id="contact-form-success">
+      <div class="success-icon">💬</div>
+      <h3 class="success-title" data-i18n="contact_suc_title">Message sent!</h3>
+      <p class="success-sub" data-i18n="contact_suc_sub">Thanks for reaching out — we'll get back to you soon.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ─── Footer ────────────────────────────────────────────── -->
 <footer>
   <svg class="footer-wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 437.6557 232.85081" aria-label="Hooky">
@@ -754,7 +793,7 @@
     </g>
   </svg>
   <p class="footer-text" data-i18n="foot_craft">Crafted with ♥</p>
-  <p class="footer-text" style="margin-top:4px;color:rgba(255,255,255,.5)">© 2026 Hooky · <a href="privacy.html" style="color:rgba(255,255,255,.5);text-decoration:underline">Privacy Policy</a></p>
+  <p class="footer-text" style="margin-top:4px;color:rgba(255,255,255,.5)">© 2026 Hooky · <a href="privacy.html" style="color:rgba(255,255,255,.5);text-decoration:underline">Privacy Policy</a> · <a href="#contact" style="color:rgba(255,255,255,.5);text-decoration:underline" data-i18n="contact_footer_link">Contact</a></p>
 </footer>
 
 <script>
@@ -816,6 +855,10 @@ const T = {
     fl_note:"At least one contact (WhatsApp, email, Instagram or Facebook) is required.",
     fl_submit:"Join the waitlist →",
     suc_title:"You're on the list!", suc_sub:"We'll reach out as soon as Hooky lands on iOS. In the meantime — try the Android version!", suc_cta:"Download for Android",
+    contact_label:"Get in touch", contact_title:"Questions or feedback?",
+    contact_sub:"We'd love to hear from you — bug reports, feature ideas, or anything else on your mind.",
+    contact_name:"Name", contact_email:"Your email", contact_message:"Message", contact_submit:"Send message →",
+    contact_suc_title:"Message sent!", contact_suc_sub:"Thanks for reaching out — we'll get back to you soon.", contact_footer_link:"Contact",
     foot_craft:"Crafted with ♥",
   },
   es: {
@@ -857,6 +900,10 @@ const T = {
     fl_note:"Se requiere al menos un contacto (WhatsApp, correo, Instagram o Facebook).",
     fl_submit:"Unirme a la lista de espera →",
     suc_title:"¡Ya estás en la lista!", suc_sub:"Te avisaremos en cuanto Hooky llegue a iOS. Mientras tanto, ¡prueba la versión para Android!", suc_cta:"Descargar para Android",
+    contact_label:"Contacta con nosotros", contact_title:"¿Preguntas o comentarios?",
+    contact_sub:"Nos encantaría saber de ti — errores, ideas de funciones o cualquier otra cosa.",
+    contact_name:"Nombre", contact_email:"Tu correo electrónico", contact_message:"Mensaje", contact_submit:"Enviar mensaje →",
+    contact_suc_title:"¡Mensaje enviado!", contact_suc_sub:"Gracias por escribirnos — te responderemos pronto.", contact_footer_link:"Contacto",
     foot_craft:"Crafted with ♥",
   },
   pt: {
@@ -898,6 +945,10 @@ const T = {
     fl_note:"Pelo menos um contato (WhatsApp, e-mail, Instagram ou Facebook) é obrigatório.",
     fl_submit:"Entrar na lista de espera →",
     suc_title:"Você está na lista!", suc_sub:"Avisaremos assim que o Hooky chegar ao iOS. Enquanto isso — experimente a versão para Android!", suc_cta:"Baixar para Android",
+    contact_label:"Fale conosco", contact_title:"Dúvidas ou feedback?",
+    contact_sub:"Adoraríamos ouvir você — relatos de bugs, ideias de funcionalidades ou qualquer outra coisa.",
+    contact_name:"Nome", contact_email:"Seu e-mail", contact_message:"Mensagem", contact_submit:"Enviar mensagem →",
+    contact_suc_title:"Mensagem enviada!", contact_suc_sub:"Obrigado por entrar em contato — responderemos em breve.", contact_footer_link:"Contato",
     foot_craft:"Crafted with ♥",
   }
 };
@@ -968,6 +1019,30 @@ document.getElementById('waitlist-form').addEventListener('submit', async (e) =>
   } catch {
     btn.disabled = false;
     btn.textContent = T[lang].fl_submit;
+    const m = {en:'Something went wrong. Please try again.', es:'Algo salió mal. Inténtalo de nuevo.', pt:'Algo deu errado. Tente novamente.'};
+    alert(m[lang]);
+  }
+});
+
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const d = Object.fromEntries(new FormData(form));
+
+  const btn = form.querySelector('.btn-submit');
+  btn.disabled = true; btn.textContent = '...';
+
+  try {
+    await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({...d, lang, ts: new Date().toISOString()})
+    });
+    document.getElementById('contact-form-wrap').style.display = 'none';
+    document.getElementById('contact-form-success').classList.add('show');
+  } catch {
+    btn.disabled = false;
+    btn.textContent = T[lang].contact_submit;
     const m = {en:'Something went wrong. Please try again.', es:'Algo salió mal. Inténtalo de nuevo.', pt:'Algo deu errado. Tente novamente.'};
     alert(m[lang]);
   }
