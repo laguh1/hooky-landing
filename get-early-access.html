@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Early Access — Hooky</title>
+  <meta name="description" content="Join Hooky's official Google Play Early Access program — step-by-step instructions to become a tester.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>(function(){var t=localStorage.getItem('hooky_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --purple:      #8C015E;
+      --purple-dark: #6f014b;
+      --purple-tint: #fdf2f8;
+      --slate:       #1E293B;
+      --white:       #ffffff;
+      --gray-50:     #f8fafc;
+      --gray-100:    #f1f5f9;
+      --gray-200:    #e2e8f0;
+      --gray-400:    #94a3b8;
+      --gray-500:    #64748b;
+      --gray-900:    #0f172a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+    h1, h2, .section-title { font-family: 'Playfair Display', Georgia, serif; }
+    .section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--purple); margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 40px); font-weight: 800;
+      letter-spacing: -0.5px; color: var(--gray-900); line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--gray-500); line-height: 1.75;
+      max-width: 560px;
+    }
+    .centered { text-align: center; }
+    .centered .section-sub { margin: 0 auto; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 24px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all .18s ease; border: none;
+    }
+    .btn-dark  { background: var(--slate); color: var(--white); }
+    .btn-dark:hover  { background: var(--gray-900); transform: translateY(-1px); }
+    .btn-purple { background: var(--purple); color: var(--white); }
+    .btn-purple:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--purple);
+      border: 1.5px solid var(--purple);
+    }
+    .btn-outline:hover { background: var(--purple-tint); }
+
+    nav { position: sticky; top: 0; z-index: 200; background: var(--purple); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; padding: 0 24px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .logo { display: flex; align-items: center; }
+    .logo svg { display: block; height: 34px; width: auto; }
+    .lang-switcher {
+      display: flex; gap: 2px;
+      background: rgba(255,255,255,.15); border-radius: 9px; padding: 3px;
+    }
+    .lang-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 5px 11px; border-radius: 7px;
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,.75); font-family: 'Inter', sans-serif;
+      transition: all .15s;
+    }
+    .lang-btn.active {
+      background: rgba(255,255,255,.9); color: var(--purple);
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+    }
+    #theme-toggle {
+      background: rgba(255,255,255,.15); border: none; border-radius: 8px;
+      width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: #fff; flex-shrink: 0; transition: background .15s;
+    }
+    #theme-toggle:hover { background: rgba(255,255,255,.25); }
+
+    /* ─── Header ──────────────────────────────────────────── */
+    .head { padding: 64px 24px 48px; }
+    .head-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--purple-tint); color: var(--purple);
+      border: 1px solid #f0abdc; border-radius: 100px;
+      padding: 5px 14px; font-size: 13px; font-weight: 500;
+      margin-bottom: 22px;
+    }
+    .head h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -1px; margin-bottom: 18px; max-width: 640px;
+    }
+    .head-sub { font-size: 18px; color: var(--gray-500); max-width: 560px; line-height: 1.75; }
+
+    /* ─── Proof screenshot ────────────────────────────────── */
+    .proof { padding: 8px 24px 64px; }
+    .proof-inner {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: center;
+    }
+    @media (max-width: 720px) { .proof-inner { grid-template-columns: 1fr; } }
+    .proof-img {
+      width: 100%; max-width: 260px; margin: 0 auto;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,.18);
+      border: 1px solid var(--gray-200);
+    }
+    .proof-img img { display: block; width: 100%; height: auto; }
+    .proof-caption { font-size: 14px; color: var(--gray-400); margin-top: 12px; text-align: center; }
+    .proof-text h2 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .proof-text p { font-size: 15px; color: var(--gray-500); line-height: 1.7; }
+
+    /* ─── Steps ───────────────────────────────────────────── */
+    .instructions { padding: 24px 24px 88px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+    @media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 16px; padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .step-number {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+      background: var(--purple); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 800;
+    }
+    .step-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .step-desc  { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+
+    /* ─── Premium callout ─────────────────────────────────── */
+    .callout {
+      max-width: 620px; margin: 0 auto 48px;
+      background: var(--purple-tint); border: 1.5px solid #f0abdc;
+      border-radius: 16px; padding: 24px 28px;
+    }
+    .callout-title { font-size: 16px; font-weight: 700; color: var(--purple-dark); margin-bottom: 6px; }
+    .callout-text { font-size: 14px; color: var(--gray-900); line-height: 1.7; }
+    [data-theme="dark"] .callout-title { color: #f9a8d4; }
+
+    /* ─── Form ────────────────────────────────────────────── */
+    .signup { padding: 0 24px 88px; }
+    .signup-inner { max-width: 480px; margin: 0 auto; text-align: center; }
+    .fg { display: flex; flex-direction: column; gap: 5px; text-align: left; margin-bottom: 16px; }
+    label { font-size: 13px; font-weight: 600; color: var(--slate); }
+    input {
+      width: 100%; border: 1.5px solid var(--gray-200); border-radius: 10px;
+      padding: 13px 14px; font-size: 15px; font-family: 'Inter', sans-serif;
+      color: var(--gray-900); background: var(--white);
+      outline: none; transition: border-color .15s;
+      appearance: none; -webkit-appearance: none;
+    }
+    input:focus { border-color: var(--purple); }
+    input::placeholder { color: var(--gray-400); }
+    .form-note { font-size: 12px; color: var(--gray-400); margin-top: 12px; }
+    .btn-submit {
+      width: 100%; padding: 16px;
+      font-size: 16px; font-weight: 700; font-family: 'Inter', sans-serif;
+      background: var(--purple); color: #fff;
+      border: none; border-radius: 12px; cursor: pointer; transition: all .18s;
+    }
+    .btn-submit:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+    .divider { display: flex; align-items: center; gap: 12px; margin: 28px 0; color: var(--gray-400); font-size: 13px; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+
+    #form-success { display: none; text-align: center; padding: 24px 20px; }
+    #form-success.show { display: block; }
+    .success-icon { font-size: 48px; margin-bottom: 14px; }
+    .success-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; }
+    .success-sub { font-size: 15px; color: var(--gray-500); }
+
+    footer { padding: 48px 24px; text-align: center; background: var(--purple); }
+    .footer-wordmark { display: block; height: 32px; width: auto; margin: 0 auto 16px; }
+    .footer-text { font-size: 14px; color: rgba(255,255,255,.75); }
+    .footer-text + .footer-text { margin-top: 4px; }
+
+    [data-theme="dark"] {
+      --white:       #0f172a;
+      --gray-50:     #1e293b;
+      --gray-100:    #1e293b;
+      --gray-200:    #334155;
+      --gray-500:    #94a3b8;
+      --gray-900:    #f1f5f9;
+      --purple-tint: rgba(140,1,94,.18);
+    }
+    [data-theme="dark"] .btn-dark   { background: #334155; color: #f1f5f9; }
+    [data-theme="dark"] .btn-purple { color: #f1f5f9; }
+    [data-theme="dark"] input::placeholder { color: #475569; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 437.6557 232.85081" height="34" style="display:block;width:auto">
+        <g transform="translate(-32.551156,-133.17192)">
+          <g transform="matrix(0.5360989,0,0,0.5360989,-79.188128,100.60923)">
+            <path fill="#ffffff" d="m 902.0961,482.87379 c -9.23367,-12.93982 -10.67297,-36.50387 -0.30338,-45.87219 10.41073,-9.40549 27.35123,0.66503 27.35123,16.25935 0.14208,4.38504 0.31734,7.58258 5.2612,7.12675 14.618,-1.38056 26.9558,-13.07705 35.736,-33.87846 13.75309,-32.58264 27.23693,-110.91087 20.7294,-115.15399 -4.02798,-2.62637 -21.80622,34.40233 -53.93894,32.0116 -47.11593,-3.5055 -72.33845,-82.13648 -19.17566,-141.94066 8.6313,-7.80559 25.38553,-10.19288 31.48643,-2.18633 2.61114,3.66477 4.52687,11.01847 1.56497,15.66624 -9.7048,5.65447 -20.18908,27.59969 -24.44253,42.10803 -7.52933,21.95453 -10.61691,46.61024 5.91453,50.87679 27.7712,7.16739 46.83775,-54.99761 50.0562,-69.98482 3.45238,-16.5313 4.37386,-42.79281 24.31985,-42.41687 21.6656,0.40835 16.4492,20.20023 17.2899,35.41687 1.1457,20.73719 1.1411,77.86697 -0.01,89.66666 -4.6241,47.51383 -12.0068,83.36264 -23.6145,114.66667 -12.46845,33.62533 -31.58295,52.59042 -59.17635,58.71365 -16.35408,1.86183 -28.61934,3.19063 -39.04835,-11.07929 z M 209.41108,345.42744 c -0.69401,-20.28147 -8.14034,-262.920562 32.06166,-283.709825 6.56156,-3.393114 20.50665,2.148666 27.78874,15.043158 6.23433,11.039227 -0.43847,18.003438 -4.69646,21.052887 -8.16431,5.84705 -18.81933,69.53352 -22.22613,105.21784 -1.74344,18.26159 -5.16264,50.77926 0.98039,55.02514 10.80466,7.46789 19.40075,-84.56855 76.07,-84.94396 42.14126,12.01874 27.18394,89.87912 29.89097,124.2331 2.93231,29.0301 5.63872,68.41758 28.32988,90.36133 10.00493,9.67538 24.98492,14.77208 40.23777,11.1502 15.25285,-3.62189 11.09902,28.93319 0.93751,31.25843 -25.18526,5.76309 -45.25987,-0.91866 -59.74597,-15.53309 -45.56972,-45.97344 -37.55283,-166.58895 -47.20368,-188.3699 -9.50215,-21.44534 -30.39787,21.26237 -37.35102,43.21469 -6.95315,21.95232 -18.48164,67.95483 -21.37956,102.85135 -0.92122,11.09325 1.61715,25.24631 -6.28102,33.34007 -5.56958,5.70751 -14.31981,6.95478 -23.39518,5.00289 -21.73117,-4.67386 -12.73981,-42.05632 -14.0179,-65.19431 z m 534.90224,65.32179 c -13.90235,-5.93007 -4.14622,-26.57626 -0.47489,-36.66953 5.51691,-15.16715 13.05702,-65.61757 11.51595,-110.4536 -1.62276,-47.21274 -20.16912,-129.63805 -3.16117,-177.631766 3.04321,-8.587434 24.95034,-8.471913 34.79194,-2.289434 21.74252,17.68333 5.25553,28.64709 -2.39256,43.17349 -10.33823,27.85321 -7.58982,58.84319 -6.32551,87.97055 0.34918,8.49335 -0.34973,24.4293 2.22514,32.5785 7.08495,6.24501 40.76481,-26.13227 46.58682,-31.04108 11.83701,-9.91847 27.5335,-26.33045 40.46585,-42.31037 7.60571,-9.39804 9.38657,-12.91488 19.16955,-14.01818 5.80479,-1.26382 17.48908,11.46548 16.14478,20.31875 -0.77289,5.09009 -6.5533,9.74677 -15.12524,14.47711 -21.38529,16.51929 -70.79275,66.4154 -71.59483,91.7309 4.4054,34.23306 42.2205,61.10995 75.2499,71.12834 17.1393,5.19865 37.67286,-2.83131 52.68185,8.50525 5.44477,4.11253 6.62372,15.32614 3.42837,23.1553 -9.50709,23.29403 -51.99452,4.73169 -75.33409,-4.66304 -37.82131,-15.22397 -87.29432,-99.03646 -93.26906,-79.12568 -0.23537,0.93778 -0.52106,22.41611 0.4557,44.09436 2.16116,47.96491 2.16334,48.2977 0.3406,51.94157 -9.08973,13.83907 -17.09093,16.92941 -35.3791,9.12856 z"/>
+            <path fill="#ffffff" stroke-width="0.1464" d="m 584.87344,370.66506 c -16.24851,-21.44388 -17.74449,-33.33162 -24.6425,-56.54334 -6.89802,-23.21172 48.50666,-32.57923 37.43201,-8.23302 5.02776,79.53839 64.09018,82.75521 102.32577,28.56426 38.31459,-54.30292 4.64962,-120.99943 -36.83763,-128.73125 -70.18295,-13.07973 -101.67696,78.73543 -125.78379,130.55162 -18.65671,38.51093 -42.02474,60.26604 -73.00982,62.26368 -30.98509,1.99764 -66.08073,-25.30647 -87.04797,-58.60634 -20.96725,-33.29986 -17.69717,-85.42444 -0.43208,-122.38686 10.18903,-21.81345 32.82174,-39.52389 55.55288,-46.15909 22.73117,-6.6352 55.4468,-7.64792 75.66914,7.47501 21.71813,16.1659 28.90589,38.94216 35.65478,64.92742 2.19662,24.20797 -54.05036,33.66951 -39.69594,8.90731 -8.45724,-90.48529 -55.54483,-62.30029 -75.95381,-43.85582 -24.99821,22.59196 -30.56519,54.7476 -20.35786,95.78856 7.48397,30.09105 24.89539,56.17981 52.66065,56.21879 51.93872,-1.15478 77.91477,-73.55068 98.42877,-113.94841 21.1874,-42.45923 72.63253,-87.19427 113.46749,-78.68587 61.04911,13.76775 75.79864,81.08965 75.20854,118.04848 -0.59012,36.95883 -15.61729,66.50594 -39.10237,88.69802 -16.95238,16.01905 -41.33452,23.97292 -65.51963,24.55843 -21.59188,0.52273 -44.97279,-11.63704 -58.01663,-28.85158 z"/>
+          </g>
+        </g>
+      </svg>
+    </a>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()"></button>
+      <div class="lang-switcher" role="group" aria-label="Language">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" onclick="setLang('pt')">PT</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="head">
+  <div class="container">
+    <div class="head-badge">🔒 <span data-i18n="ea_badge">Private Early Access</span></div>
+    <h1 data-i18n="ea_title">Get early access to Hooky</h1>
+    <p class="head-sub" data-i18n="ea_sub">Hooky is currently in Google Play's official Early Access program — not open to everyone yet. Here's exactly how to join, step by step.</p>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="proof-inner">
+    <div>
+      <div class="proof-img"><img src="assets/play-store-early-access.jpg" alt="Hooky's official Early Access listing on Google Play"></div>
+      <p class="proof-caption" data-i18n="ea_proof_caption">A real tester's screen</p>
+    </div>
+    <div class="proof-text">
+      <h2 data-i18n="ea_proof_title">This is what an official listing looks like</h2>
+      <p data-i18n="ea_proof_text">This isn't an unofficial download or a modified APK — it's Hooky's real, official "Early Access" listing on Google Play, exactly as Google shows it to invited testers. Once you're added, your screen will look just like this.</p>
+    </div>
+  </div>
+</section>
+
+<section class="instructions">
+  <div class="container centered">
+    <p class="section-label" data-i18n="ea_steps_label">How it works</p>
+    <h2 class="section-title" data-i18n="ea_steps_title">Four steps to becoming a tester</h2>
+  </div>
+  <div class="container">
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div>
+          <div class="step-title" data-i18n="ea_step1_title">Request access below</div>
+          <div class="step-desc" data-i18n="ea_step1_desc">Enter the Gmail address you use for Google Play. We'll add it to Hooky's private tester list — usually within 24 hours.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div>
+          <div class="step-title" data-i18n="ea_step2_title">Open the join link on your Android phone</div>
+          <div class="step-desc" data-i18n="ea_step2_desc">Once you've been added, tap the "Join as a tester" button below on your Android device, signed into the same Google account.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div>
+          <div class="step-title" data-i18n="ea_step3_title">Tap "Become a tester"</div>
+          <div class="step-desc" data-i18n="ea_step3_desc">Google Play will show a confirmation screen. Tap it to accept — this is a normal, official part of Google Play testing programs.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div>
+          <div class="step-title" data-i18n="ea_step4_title">Install and start crafting</div>
+          <div class="step-desc" data-i18n="ea_step4_desc">Find Hooky in the Play Store and install it like any other app. Welcome aboard — your feedback helps shape the app before public launch!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signup">
+  <div class="signup-inner">
+    <div class="callout">
+      <div class="callout-title" data-i18n="ea_callout_title">🎁 Free 1-year Premium for early testers</div>
+      <div class="callout-text" data-i18n="ea_callout_text">Anyone who installs Hooky before 30 September 2026 automatically gets a full year of Hooky Premium, free — locked in for you even after the offer ends. It happens on its own once you install; no extra steps needed.</div>
+    </div>
+
+    <div id="form-wrap">
+      <p class="section-label" data-i18n="ea_form_label">Request access</p>
+      <h2 class="section-title" style="font-size:26px" data-i18n="ea_form_title">Not on the list yet?</h2>
+      <p class="section-sub" style="margin-bottom:24px" data-i18n="ea_form_sub">Enter the Gmail address you use for Google Play and we'll add you as a tester.</p>
+      <form id="tester-form">
+        <div class="fg">
+          <label for="t-email" data-i18n="ea_form_email_label">Your Google Play Gmail address</label>
+          <input id="t-email" name="email" type="email" required autocomplete="email" placeholder="maria@gmail.com">
+        </div>
+        <input type="hidden" name="_subject" value="Hooky — new early access request">
+        <input type="hidden" name="form_type" value="early_access_request">
+        <button type="submit" class="btn-submit" data-i18n="ea_form_submit">Request early access →</button>
+        <p class="form-note" data-i18n="ea_form_note">We'll only use this to add you to Hooky's private testing list on Google Play. No spam, ever.</p>
+      </form>
+    </div>
+
+    <div id="form-success">
+      <div class="success-icon">🎉</div>
+      <h3 class="success-title" data-i18n="ea_suc_title">Request received!</h3>
+      <p class="success-sub" data-i18n="ea_suc_sub">We'll add you within 24 hours. Come back and tap the button below once you've been added.</p>
+    </div>
+
+    <div class="divider" data-i18n="ea_divider">already invited</div>
+
+    <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="btn btn-purple" style="width:100%;justify-content:center" data-i18n="ea_join_cta">Join as a tester →</a>
+  </div>
+</section>
+
+<footer>
+  <svg class="footer-wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 437.6557 232.85081" aria-label="Hooky">
+    <g transform="translate(-32.551156,-133.17192)">
+      <g transform="matrix(0.5360989,0,0,0.5360989,-79.188128,100.60923)">
+        <path fill="#ffffff" d="m 902.0961,482.87379 c -9.23367,-12.93982 -10.67297,-36.50387 -0.30338,-45.87219 10.41073,-9.40549 27.35123,0.66503 27.35123,16.25935 0.14208,4.38504 0.31734,7.58258 5.2612,7.12675 14.618,-1.38056 26.9558,-13.07705 35.736,-33.87846 13.75309,-32.58264 27.23693,-110.91087 20.7294,-115.15399 -4.02798,-2.62637 -21.80622,34.40233 -53.93894,32.0116 -47.11593,-3.5055 -72.33845,-82.13648 -19.17566,-141.94066 8.6313,-7.80559 25.38553,-10.19288 31.48643,-2.18633 2.61114,3.66477 4.52687,11.01847 1.56497,15.66624 -9.7048,5.65447 -20.18908,27.59969 -24.44253,42.10803 -7.52933,21.95453 -10.61691,46.61024 5.91453,50.87679 27.7712,7.16739 46.83775,-54.99761 50.0562,-69.98482 3.45238,-16.5313 4.37386,-42.79281 24.31985,-42.41687 21.6656,0.40835 16.4492,20.20023 17.2899,35.41687 1.1457,20.73719 1.1411,77.86697 -0.01,89.66666 -4.6241,47.51383 -12.0068,83.36264 -23.6145,114.66667 -12.46845,33.62533 -31.58295,52.59042 -59.17635,58.71365 -16.35408,1.86183 -28.61934,3.19063 -39.04835,-11.07929 z M 209.41108,345.42744 c -0.69401,-20.28147 -8.14034,-262.920562 32.06166,-283.709825 6.56156,-3.393114 20.50665,2.148666 27.78874,15.043158 6.23433,11.039227 -0.43847,18.003438 -4.69646,21.052887 -8.16431,5.84705 -18.81933,69.53352 -22.22613,105.21784 -1.74344,18.26159 -5.16264,50.77926 0.98039,55.02514 10.80466,7.46789 19.40075,-84.56855 76.07,-84.94396 42.14126,12.01874 27.18394,89.87912 29.89097,124.2331 2.93231,29.0301 5.63872,68.41758 28.32988,90.36133 10.00493,9.67538 24.98492,14.77208 40.23777,11.1502 15.25285,-3.62189 11.09902,28.93319 0.93751,31.25843 -25.18526,5.76309 -45.25987,-0.91866 -59.74597,-15.53309 -45.56972,-45.97344 -37.55283,-166.58895 -47.20368,-188.3699 -9.50215,-21.44534 -30.39787,21.26237 -37.35102,43.21469 -6.95315,21.95232 -18.48164,67.95483 -21.37956,102.85135 -0.92122,11.09325 1.61715,25.24631 -6.28102,33.34007 -5.56958,5.70751 -14.31981,6.95478 -23.39518,5.00289 -21.73117,-4.67386 -12.73981,-42.05632 -14.0179,-65.19431 z m 534.90224,65.32179 c -13.90235,-5.93007 -4.14622,-26.57626 -0.47489,-36.66953 5.51691,-15.16715 13.05702,-65.61757 11.51595,-110.4536 -1.62276,-47.21274 -20.16912,-129.63805 -3.16117,-177.631766 3.04321,-8.587434 24.95034,-8.471913 34.79194,-2.289434 21.74252,17.68333 5.25553,28.64709 -2.39256,43.17349 -10.33823,27.85321 -7.58982,58.84319 -6.32551,87.97055 0.34918,8.49335 -0.34973,24.4293 2.22514,32.5785 7.08495,6.24501 40.76481,-26.13227 46.58682,-31.04108 11.83701,-9.91847 27.5335,-26.33045 40.46585,-42.31037 7.60571,-9.39804 9.38657,-12.91488 19.16955,-14.01818 5.80479,-1.26382 17.48908,11.46548 16.14478,20.31875 -0.77289,5.09009 -6.5533,9.74677 -15.12524,14.47711 -21.38529,16.51929 -70.79275,66.4154 -71.59483,91.7309 4.4054,34.23306 42.2205,61.10995 75.2499,71.12834 17.1393,5.19865 37.67286,-2.83131 52.68185,8.50525 5.44477,4.11253 6.62372,15.32614 3.42837,23.1553 -9.50709,23.29403 -51.99452,4.73169 -75.33409,-4.66304 -37.82131,-15.22397 -87.29432,-99.03646 -93.26906,-79.12568 -0.23537,0.93778 -0.52106,22.41611 0.4557,44.09436 2.16116,47.96491 2.16334,48.2977 0.3406,51.94157 -9.08973,13.83907 -17.09093,16.92941 -35.3791,9.12856 z"/>
+        <path fill="#ffffff" d="m 584.87344,370.66506 c -16.24851,-21.44388 -17.74449,-33.33162 -24.6425,-56.54334 -6.89802,-23.21172 48.50666,-32.57923 37.43201,-8.23302 5.02776,79.53839 64.09018,82.75521 102.32577,28.56426 38.31459,-54.30292 4.64962,-120.99943 -36.83763,-128.73125 -70.18295,-13.07973 -101.67696,78.73543 -125.78379,130.55162 -18.65671,38.51093 -42.02474,60.26604 -73.00982,62.26368 -30.98509,1.99764 -66.08073,-25.30647 -87.04797,-58.60634 -20.96725,-33.29986 -17.69717,-85.42444 -0.43208,-122.38686 10.18903,-21.81345 32.82174,-39.52389 55.55288,-46.15909 22.73117,-6.6352 55.4468,-7.64792 75.66914,7.47501 21.71813,16.1659 28.90589,38.94216 35.65478,64.92742 2.19662,24.20797 -54.05036,33.66951 -39.69594,8.90731 -8.45724,-90.48529 -55.54483,-62.30029 -75.95381,-43.85582 -24.99821,22.59196 -30.56519,54.7476 -20.35786,95.78856 7.48397,30.09105 24.89539,56.17981 52.66065,56.21879 51.93872,-1.15478 77.91477,-73.55068 98.42877,-113.94841 21.1874,-42.45923 72.63253,-87.19427 113.46749,-78.68587 61.04911,13.76775 75.79864,81.08965 75.20854,118.04848 -0.59012,36.95883 -15.61729,66.50594 -39.10237,88.69802 -16.95238,16.01905 -41.33452,23.97292 -65.51963,24.55843 -21.59188,0.52273 -44.97279,-11.63704 -58.01663,-28.85158 z"/>
+      </g>
+    </g>
+  </svg>
+  <p class="footer-text" data-i18n="foot_craft">Crafted with ♥</p>
+  <p class="footer-text" style="margin-top:4px;color:rgba(255,255,255,.5)">© 2026 Hooky · <a href="privacy.html" style="color:rgba(255,255,255,.5);text-decoration:underline">Privacy Policy</a></p>
+</footer>
+
+<script>
+const MOON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+const SUN  = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('hooky_theme', t);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.innerHTML = t === 'dark' ? SUN : MOON;
+}
+function toggleTheme() {
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+(function() {
+  const t = localStorage.getItem('hooky_theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+  applyTheme(t);
+})();
+
+const T = {
+  en: {
+    ea_badge:"Private Early Access",
+    ea_title:"Get early access to Hooky",
+    ea_sub:"Hooky is currently in Google Play's official Early Access program — not open to everyone yet. Here's exactly how to join, step by step.",
+    ea_proof_caption:"A real tester's screen",
+    ea_proof_title:"This is what an official listing looks like",
+    ea_proof_text:"This isn't an unofficial download or a modified APK — it's Hooky's real, official \"Early Access\" listing on Google Play, exactly as Google shows it to invited testers. Once you're added, your screen will look just like this.",
+    ea_steps_label:"How it works", ea_steps_title:"Four steps to becoming a tester",
+    ea_step1_title:"Request access below", ea_step1_desc:"Enter the Gmail address you use for Google Play. We'll add it to Hooky's private tester list — usually within 24 hours.",
+    ea_step2_title:"Open the join link on your Android phone", ea_step2_desc:"Once you've been added, tap the \"Join as a tester\" button below on your Android device, signed into the same Google account.",
+    ea_step3_title:"Tap \"Become a tester\"", ea_step3_desc:"Google Play will show a confirmation screen. Tap it to accept — this is a normal, official part of Google Play testing programs.",
+    ea_step4_title:"Install and start crafting", ea_step4_desc:"Find Hooky in the Play Store and install it like any other app. Welcome aboard — your feedback helps shape the app before public launch!",
+    ea_callout_title:"🎁 Free 1-year Premium for early testers",
+    ea_callout_text:"Anyone who installs Hooky before 30 September 2026 automatically gets a full year of Hooky Premium, free — locked in for you even after the offer ends. It happens on its own once you install; no extra steps needed.",
+    ea_form_label:"Request access", ea_form_title:"Not on the list yet?",
+    ea_form_sub:"Enter the Gmail address you use for Google Play and we'll add you as a tester.",
+    ea_form_email_label:"Your Google Play Gmail address",
+    ea_form_submit:"Request early access →",
+    ea_form_note:"We'll only use this to add you to Hooky's private testing list on Google Play. No spam, ever.",
+    ea_suc_title:"Request received!",
+    ea_suc_sub:"We'll add you within 24 hours. Come back and tap the button below once you've been added.",
+    ea_divider:"already invited",
+    ea_join_cta:"Join as a tester →",
+    foot_craft:"Crafted with ♥",
+  },
+  es: {
+    ea_badge:"Acceso anticipado privado",
+    ea_title:"Consigue acceso anticipado a Hooky",
+    ea_sub:"Hooky está actualmente en el programa oficial de Acceso Anticipado de Google Play — todavía no está abierto a todo el mundo. Así es exactamente cómo unirte, paso a paso.",
+    ea_proof_caption:"La pantalla real de un tester",
+    ea_proof_title:"Así se ve una ficha oficial",
+    ea_proof_text:"Esto no es una descarga no oficial ni un APK modificado — es la ficha real y oficial de Hooky en \"Acceso anticipado\" de Google Play, tal como Google se la muestra a las personas invitadas. Una vez que te añadamos, tu pantalla se verá exactamente así.",
+    ea_steps_label:"Cómo funciona", ea_steps_title:"Cuatro pasos para convertirte en tester",
+    ea_step1_title:"Solicita acceso abajo", ea_step1_desc:"Introduce el correo de Gmail que usas para Google Play. Lo añadiremos a la lista privada de testers de Hooky — normalmente en 24 horas.",
+    ea_step2_title:"Abre el enlace de acceso en tu Android", ea_step2_desc:"Una vez que te hayamos añadido, pulsa el botón \"Unirme como tester\" de abajo en tu dispositivo Android, con la misma cuenta de Google.",
+    ea_step3_title:"Pulsa \"Convertirme en tester\"", ea_step3_desc:"Google Play mostrará una pantalla de confirmación. Pulsa para aceptar — es una parte normal y oficial de los programas de pruebas de Google Play.",
+    ea_step4_title:"Instala y empieza a crear", ea_step4_desc:"Busca Hooky en la Play Store e instálala como cualquier otra app. ¡Ya eres parte del equipo! Tu opinión ayuda a dar forma a la app antes del lanzamiento público.",
+    ea_callout_title:"🎁 Un año de Premium gratis para testers tempranos",
+    ea_callout_text:"Cualquiera que instale Hooky antes del 30 de septiembre de 2026 obtiene automáticamente un año completo de Hooky Premium, gratis — asegurado para ti incluso después de que termine la oferta. Ocurre solo, sin pasos adicionales.",
+    ea_form_label:"Solicitar acceso", ea_form_title:"¿Aún no estás en la lista?",
+    ea_form_sub:"Introduce el correo de Gmail que usas para Google Play y te añadiremos como tester.",
+    ea_form_email_label:"Tu correo de Gmail de Google Play",
+    ea_form_submit:"Solicitar acceso anticipado →",
+    ea_form_note:"Solo lo usaremos para añadirte a la lista privada de pruebas de Hooky en Google Play. Nunca spam.",
+    ea_suc_title:"¡Solicitud recibida!",
+    ea_suc_sub:"Te añadiremos en 24 horas. Vuelve y pulsa el botón de abajo una vez que te hayamos añadido.",
+    ea_divider:"ya tengo invitación",
+    ea_join_cta:"Unirme como tester →",
+    foot_craft:"Crafted with ♥",
+  },
+  pt: {
+    ea_badge:"Acesso antecipado privado",
+    ea_title:"Tenha acesso antecipado ao Hooky",
+    ea_sub:"O Hooky está atualmente no programa oficial de Acesso Antecipado do Google Play — ainda não está aberto para todos. Veja exatamente como entrar, passo a passo.",
+    ea_proof_caption:"A tela real de um tester",
+    ea_proof_title:"É assim que uma ficha oficial se parece",
+    ea_proof_text:"Isso não é um download não oficial nem um APK modificado — é a ficha real e oficial do Hooky em \"Acesso antecipado\" no Google Play, exatamente como o Google mostra para quem foi convidado. Assim que você for adicionada, sua tela vai ficar igual a essa.",
+    ea_steps_label:"Como funciona", ea_steps_title:"Quatro passos para se tornar tester",
+    ea_step1_title:"Solicite acesso abaixo", ea_step1_desc:"Digite o e-mail do Gmail que você usa no Google Play. Vamos adicioná-lo à lista privada de testers do Hooky — geralmente em até 24 horas.",
+    ea_step2_title:"Abra o link de entrada no seu Android", ea_step2_desc:"Depois de ser adicionada, toque no botão \"Entrar como tester\" abaixo no seu aparelho Android, usando a mesma conta do Google.",
+    ea_step3_title:"Toque em \"Tornar-se tester\"", ea_step3_desc:"O Google Play vai mostrar uma tela de confirmação. Toque para aceitar — isso é uma parte normal e oficial dos programas de teste do Google Play.",
+    ea_step4_title:"Instale e comece a criar", ea_step4_desc:"Encontre o Hooky na Play Store e instale como qualquer outro app. Você já faz parte da equipe! Seu feedback ajuda a moldar o app antes do lançamento público.",
+    ea_callout_title:"🎁 Um ano de Premium grátis para testers iniciais",
+    ea_callout_text:"Quem instalar o Hooky antes de 30 de setembro de 2026 ganha automaticamente um ano inteiro de Hooky Premium, grátis — garantido mesmo depois que a oferta terminar. Acontece sozinho assim que você instala, sem nenhum passo extra.",
+    ea_form_label:"Solicitar acesso", ea_form_title:"Ainda não está na lista?",
+    ea_form_sub:"Digite o e-mail do Gmail que você usa no Google Play e vamos te adicionar como tester.",
+    ea_form_email_label:"Seu e-mail do Gmail no Google Play",
+    ea_form_submit:"Solicitar acesso antecipado →",
+    ea_form_note:"Vamos usar isso só para te adicionar à lista privada de testes do Hooky no Google Play. Sem spam, nunca.",
+    ea_suc_title:"Solicitação recebida!",
+    ea_suc_sub:"Vamos te adicionar em até 24 horas. Volte aqui e toque no botão abaixo depois de ser adicionada.",
+    ea_divider:"já tenho convite",
+    ea_join_cta:"Entrar como tester →",
+    foot_craft:"Crafted with ♥",
+  }
+};
+
+let lang = 'en';
+function detectLang() {
+  const s = localStorage.getItem('hooky_lang');
+  if (s && T[s]) return s;
+  const n = (navigator.language || 'en').toLowerCase();
+  if (n.startsWith('pt')) return 'pt';
+  if (n.startsWith('es')) return 'es';
+  return 'en';
+}
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('hooky_lang', l);
+  document.documentElement.lang = l === 'pt' ? 'pt-BR' : l;
+  const t = T[l];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t[el.getAttribute('data-i18n')];
+    if (v !== undefined) el.textContent = v;
+  });
+  const titles = {en:'Get Early Access — Hooky', es:'Acceso Anticipado — Hooky', pt:'Acesso Antecipado — Hooky'};
+  document.title = titles[l];
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+}
+
+/* Form → FormSubmit.co (no backend needed; emails hooky.crochet.app@gmail.com).
+   First-ever submission to a new address requires a one-time confirmation click
+   sent to that inbox before deliveries start. */
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/hooky.crochet.app@gmail.com';
+
+document.getElementById('tester-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const d = Object.fromEntries(new FormData(form));
+  const btn = form.querySelector('.btn-submit');
+  btn.disabled = true; btn.textContent = '...';
+
+  try {
+    await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({...d, lang, ts: new Date().toISOString()})
+    });
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('form-success').classList.add('show');
+  } catch {
+    btn.disabled = false;
+    btn.textContent = T[lang].ea_form_submit;
+    const m = {en:'Something went wrong. Please try again.', es:'Algo salió mal. Inténtalo de nuevo.', pt:'Algo deu errado. Tente novamente.'};
+    alert(m[lang]);
+  }
+});
+
+setLang(detectLang());
+</script>
+</body>
+</html>

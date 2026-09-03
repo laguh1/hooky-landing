@@ -116,6 +116,28 @@
       box-shadow: 0 1px 4px rgba(0,0,0,.12);
     }
 
+    /* ─── Nav links (how it works / early access) ──────────── */
+    .nav-links { display: flex; align-items: center; gap: 18px; }
+    .nav-links > a:not(.nav-cta) {
+      color: rgba(255,255,255,.85); font-size: 14px; font-weight: 600;
+      transition: color .15s;
+    }
+    .nav-links > a:not(.nav-cta):hover { color: #fff; }
+    .nav-cta {
+      background: #fff; color: var(--purple) !important;
+      padding: 8px 16px; border-radius: 100px;
+      font-size: 13px; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+      transition: all .15s;
+    }
+    .nav-cta:hover { background: var(--purple-tint); transform: translateY(-1px); }
+    @media (max-width: 760px) {
+      .nav-links { gap: 8px; }
+      .nav-links > a:not(.nav-cta) { font-size: 12px; }
+      .nav-cta { padding: 7px 12px; font-size: 12px; }
+    }
+
     /* ─── Hero ────────────────────────────────────────────── */
     .hero {
       padding: 80px 24px 64px;
@@ -226,6 +248,35 @@
     .feat-icon-wrap svg { width: 32px; height: 32px; color: var(--purple); }
     .feat-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
     .feat-desc  { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+
+    /* ─── Instructions ───────────────────────────────────── */
+    .instructions { padding: 88px 24px; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px; margin-top: 52px;
+    }
+    @media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 16px; padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .step-number {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+      background: var(--purple); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 800;
+    }
+    .step-body {}
+    .step-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .step-desc  { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+    .step-preview {
+      display: block; margin-top: 14px; width: 100%; max-width: 220px;
+      border-radius: 10px; border: 1px solid var(--gray-200);
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    }
 
     /* ─── Tutorial ────────────────────────────────────────── */
     .tutorial { padding: 88px 24px; }
@@ -361,6 +412,10 @@
         </g>
       </svg>
     </a>
+    <div class="nav-links">
+      <a href="#instructions" data-i18n="nav_how">How it works</a>
+      <a href="get-early-access.html" class="nav-cta" data-i18n="nav_tester">Get Early Access</a>
+    </div>
     <div style="display:flex;align-items:center;gap:8px">
       <button id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()"></button>
       <div class="lang-switcher" role="group" aria-label="Language">
@@ -387,8 +442,7 @@
         The crochet &amp; knitting app for makers who take their craft seriously. Pieces, yarn stash, stitches — all in one place.
       </p>
       <div class="hero-ctas fade-in-3">
-        <!-- Replace PLAY_STORE_URL with your Google Play link when published -->
-        <a href="PLAY_STORE_URL" class="btn btn-dark" id="android-cta">
+        <a href="get-early-access.html" class="btn btn-dark" id="android-cta">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M3.18 23.76a2.5 2.5 0 0 0 2.48-.16l11.4-6.58-2.58-2.58L3.18 23.76zM21.27 9.85l-2.93-1.69-2.88 2.84 2.88 2.84 2.95-1.7a1.5 1.5 0 0 0 0-2.29zM1.23 1.37A1.5 1.5 0 0 0 1 2.26v19.48a1.5 1.5 0 0 0 .23.89l.1.1L13.03 11v-.27L1.33 1.27l-.1.1zM5.66.4l11.4 6.58-2.58 2.58L5.66.4z"/>
           </svg>
@@ -534,6 +588,49 @@
   </div>
 </section>
 
+<!-- ─── Instructions ──────────────────────────────────────── -->
+<section class="instructions" id="instructions">
+  <div class="container centered">
+    <p class="section-label" data-i18n="inst_label">Get started</p>
+    <h2 class="section-title" data-i18n="inst_title">From download to first project in minutes</h2>
+    <p class="section-sub" data-i18n="inst_sub">No account, no setup. Just install and start tracking.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-body">
+          <div class="step-title" data-i18n="step1_title">Download Hooky</div>
+          <div class="step-desc" data-i18n="step1_desc">Download it for free from your app store. No account or login required — open the app and you're ready.</div>
+          <img class="step-preview" src="assets/play-store-early-access.jpg" alt="Hooky's Early Access listing on Google Play">
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-body">
+          <div class="step-title" data-i18n="step2_title">Add your first piece</div>
+          <div class="step-desc" data-i18n="step2_desc">Tap + on the Pieces tab. Give it a name, pick a type and status, add a photo. That's it — your project is tracked.</div>
+          <img class="step-preview" src="assets/step2-preview.jpg" alt="Hooky's Pieces list screen">
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-body">
+          <div class="step-title" data-i18n="step3_title">Log your yarn &amp; needles</div>
+          <div class="step-desc" data-i18n="step3_desc">Head to Yarns or Needles and add what you own. Scan label photos with your camera to fill in details automatically.</div>
+          <img class="step-preview" src="assets/step3-preview.jpg" alt="Hooky's Yarns list screen">
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-body">
+          <div class="step-title" data-i18n="step4_title">Track rows &amp; see your profit</div>
+          <div class="step-desc" data-i18n="step4_desc">Use the row counter and work timer while you craft. The cost &amp; profit calculator shows exactly what each piece is worth.</div>
+          <img class="step-preview" src="assets/step4-preview.jpg" alt="Hooky's Price Calculator screen showing suggested price">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── Tutorial ───────────────────────────────────────────── -->
 <section class="tutorial">
   <div class="container centered">
@@ -573,12 +670,9 @@
     <p class="section-sub" style="margin-bottom:36px" data-i18n="wl_sub">We're building the iPhone version. Leave your details and you'll be the first to know when it launches.</p>
 
     <div id="form-wrap">
-      <!--
-        FORM SETUP — Google Sheets (free, unlimited, recommended)
-        See docs/PROMOTION.md for step-by-step setup instructions.
-        Replace GOOGLE_SCRIPT_URL with your Apps Script Web App URL.
-      -->
+      <!-- Submits via FormSubmit.co to hooky.crochet.app@gmail.com — see docs/PROMOTION.md -->
       <form id="waitlist-form">
+        <input type="hidden" name="_subject" value="Hooky — new iOS waitlist signup">
         <div class="form-grid">
           <div class="fg">
             <label for="f-name" data-i18n="fl_name">First name</label>
@@ -644,7 +738,7 @@
       <div class="success-icon">🎉</div>
       <h3 class="success-title" data-i18n="suc_title">You're on the list!</h3>
       <p class="success-sub" data-i18n="suc_sub">We'll reach out as soon as Hooky lands on iOS. In the meantime — try the Android version!</p>
-      <a href="PLAY_STORE_URL" class="btn btn-purple" data-i18n="suc_cta">Download for Android</a>
+      <a href="get-early-access.html" class="btn btn-purple" data-i18n="suc_cta">Download for Android</a>
     </div>
   </div>
 </section>
@@ -684,6 +778,7 @@ function toggleTheme() {
 /* ─── Translations ────────────────────────────────────────── */
 const T = {
   en: {
+    nav_how:"How it works", nav_tester:"Get Early Access",
     badge:"Free on Android",
     hero_title:"Track every stitch.<br><em>From first row to sold.</em>",
     hero_sub:"The crochet & knitting app for makers who take their craft seriously. Pieces, yarn stash, stitches — all in one place.",
@@ -701,6 +796,12 @@ const T = {
     f4_title:"Needle tracker", f4_desc:"Know exactly which needles and hook sizes you own. Scan labels with your camera to add them instantly.",
     f5_title:"Row counter & timer", f5_desc:"Tap, speak or type to count rows hands-free. Built-in work timer logs every minute and feeds the price calculator.",
     f6_title:"Cost & profit", f6_desc:"See material costs, labour and profit margin per piece. Know exactly what your work is worth before you price it.",
+    inst_label:"Get started", inst_title:"From download to first project in minutes",
+    inst_sub:"No account, no setup. Just install and start tracking.",
+    step1_title:"Download Hooky", step1_desc:"Download it for free from your app store. No account or login required — open the app and you're ready.",
+    step2_title:"Add your first piece", step2_desc:"Tap + on the Pieces tab. Give it a name, pick a type and status, add a photo. That's it — your project is tracked.",
+    step3_title:"Log your yarn & needles", step3_desc:"Head to Yarns or Needles and add what you own. Scan label photos with your camera to fill in details automatically.",
+    step4_title:"Track rows & see your profit", step4_desc:"Use the row counter and work timer while you craft. The cost & profit calculator shows exactly what each piece is worth.",
     tut_label:"Tutorial", tut_title:"See Hooky in action",
     tut_sub:"Watch how crafters use Hooky to stay organized and price their work with confidence.",
     tut_soon:"Tutorial video coming soon",
@@ -718,6 +819,7 @@ const T = {
     foot_craft:"Crafted with ♥",
   },
   es: {
+    nav_how:"Cómo funciona", nav_tester:"Acceso Anticipado",
     badge:"Gratis en Android",
     hero_title:"Registra cada punto.<br><em>De la primera vuelta a la venta.</em>",
     hero_sub:"La app de crochet y tejido para quienes se toman en serio su oficio. Proyectos, lanas, puntos — todo en un solo lugar.",
@@ -728,15 +830,21 @@ const T = {
     stat2:"idiomas — EN, ES, PT-BR",
     stat3:"sin conexión · sin cuenta", stat4:"funciones básicas, siempre gratis",
     feat_label:"Funciones", feat_title:"Todo lo que tu artesanía necesita",
-    feat_sub:"Creada por artesanas, para artesanas. Sin complicaciones, sin anuncios, sin cuenta, sin suscripción para lo básico.",
+    feat_sub:"Creada por y para quienes se toman en serio su oficio. Sin complicaciones, sin anuncios, sin cuenta, sin suscripción para lo básico.",
     f1_title:"Seguimiento de proyectos", f1_desc:"Registra cada pieza desde el inicio hasta terminada — estado, dimensiones, fotos e información de venta.",
     f2_title:"Inventario de lanas", f2_desc:"Sabe exactamente qué lana tienes, cuánta y dónde la compraste. Sin más madejas misteriosas.",
     f3_title:"Biblioteca de puntos", f3_desc:"Guarda tus puntos favoritos con enlaces a tutoriales, fotos de diagramas y nivel de dificultad.",
     f4_title:"Gestión de agujas", f4_desc:"Sabe exactamente qué agujas y tamaños de ganchillo tienes. Escanea etiquetas con tu cámara para añadirlos al instante.",
     f5_title:"Contador de vueltas y temporizador", f5_desc:"Toca, habla o escribe para contar vueltas con las manos libres. El temporizador integrado registra cada minuto y alimenta la calculadora de precios.",
     f6_title:"Costes y beneficios", f6_desc:"Ve el coste de materiales, la mano de obra y el margen de beneficio por pieza. Sabe lo que realmente vale tu trabajo antes de ponerle precio.",
+    inst_label:"Cómo empezar", inst_title:"Del descargo a tu primer proyecto en minutos",
+    inst_sub:"Sin cuenta, sin configuración. Solo instala y empieza a registrar.",
+    step1_title:"Descarga Hooky", step1_desc:"Descárgala gratis desde tu tienda de apps. Sin cuenta ni inicio de sesión — abre la app y ya estás listo para empezar.",
+    step2_title:"Añade tu primera pieza", step2_desc:"Pulsa + en la pestaña Piezas. Dale un nombre, elige el tipo y estado, añade una foto. Listo — tu proyecto ya está registrado.",
+    step3_title:"Registra tus lanas y agujas", step3_desc:"Ve a Lanas o Agujas y añade lo que tienes. Escanea las etiquetas con tu cámara para rellenar los detalles automáticamente.",
+    step4_title:"Cuenta vueltas y ve tus beneficios", step4_desc:"Usa el contador de vueltas y el temporizador mientras trabajas. La calculadora de costes y beneficios muestra exactamente cuánto vale cada pieza.",
     tut_label:"Tutorial", tut_title:"Hooky en acción",
-    tut_sub:"Mira cómo las artesanas usan Hooky para organizarse y calcular el precio de su trabajo con confianza.",
+    tut_sub:"Mira cómo quienes tejen y hacen crochet usan Hooky para organizarse y calcular el precio de su trabajo con confianza.",
     tut_soon:"Vídeo tutorial próximamente",
     wl_badge:"Próximamente en iPhone", wl_title:"Únete a la lista de espera para iOS",
     wl_sub:"Estamos desarrollando la versión para iPhone. Deja tus datos y serás la primera en saber cuándo se lanza.",
@@ -752,6 +860,7 @@ const T = {
     foot_craft:"Crafted with ♥",
   },
   pt: {
+    nav_how:"Como funciona", nav_tester:"Acesso Antecipado",
     badge:"Grátis no Android",
     hero_title:"Registre cada ponto.<br><em>Da primeira fileira à venda.</em>",
     hero_sub:"O app de crochê e tricô para quem leva o artesanato a sério. Peças, fios, pontos — tudo em um só lugar.",
@@ -762,15 +871,21 @@ const T = {
     stat2:"idiomas — EN, ES, PT-BR",
     stat3:"offline · sem cadastro", stat4:"funcionalidades básicas, sempre grátis",
     feat_label:"Funcionalidades", feat_title:"Tudo que o seu artesanato precisa",
-    feat_sub:"Criado por artesãs, para artesãs. Sem enrolação, sem anúncios, sem cadastro, sem assinatura para o básico.",
+    feat_sub:"Criado por e para quem leva o seu ofício a sério. Sem enrolação, sem anúncios, sem cadastro, sem assinatura para o básico.",
     f1_title:"Rastreador de projetos", f1_desc:"Registre cada peça do início ao fim — status, medidas, fotos e informações de venda em um só lugar.",
     f2_title:"Estoque de fios", f2_desc:"Saiba exatamente quais fios você tem, quanto e onde comprou. Chega de meadas misteriosas.",
     f3_title:"Biblioteca de pontos", f3_desc:"Salve seus pontos favoritos com links para tutoriais, fotos de esquemas e nível de dificuldade.",
     f4_title:"Gestão de agulhas", f4_desc:"Saiba exatamente quais agulhas e tamanhos de crochê você tem. Escaneie etiquetas com a câmera para adicioná-las instantaneamente.",
     f5_title:"Contador de fileiras e cronômetro", f5_desc:"Toque, fale ou digite para contar fileiras sem usar as mãos. O cronômetro integrado registra cada minuto e alimenta a calculadora de preços.",
     f6_title:"Custos e lucros", f6_desc:"Veja o custo de materiais, a mão de obra e a margem de lucro por peça. Saiba o valor real do seu trabalho antes de precificá-lo.",
+    inst_label:"Como começar", inst_title:"Do download ao primeiro projeto em minutos",
+    inst_sub:"Sem cadastro, sem configuração. Só instalar e começar a registrar.",
+    step1_title:"Baixe o Hooky", step1_desc:"Baixe gratuitamente na sua loja de apps. Sem cadastro ou login — abra o app e já está pronto.",
+    step2_title:"Adicione sua primeira peça", step2_desc:"Toque em + na aba Peças. Dê um nome, escolha o tipo e status, adicione uma foto. Pronto — seu projeto está registrado.",
+    step3_title:"Registre seus fios e agulhas", step3_desc:"Vá a Fios ou Agulhas e adicione o que você tem. Escaneie as etiquetas com a câmera para preencher os detalhes automaticamente.",
+    step4_title:"Conte fileiras e veja seu lucro", step4_desc:"Use o contador de fileiras e o cronômetro enquanto trabalha. A calculadora de custos e lucros mostra exatamente quanto cada peça vale.",
     tut_label:"Tutorial", tut_title:"Hooky em ação",
-    tut_sub:"Veja como artesãs usam o Hooky para se organizar e precificar o trabalho com confiança.",
+    tut_sub:"Veja como quem tricota e faz crochê usa o Hooky para se organizar e precificar o trabalho com confiança.",
     tut_soon:"Vídeo tutorial em breve",
     wl_badge:"Em breve no iPhone", wl_title:"Entre na lista de espera para iOS",
     wl_sub:"Estamos desenvolvendo a versão para iPhone. Deixe seus dados e você será uma das primeiras a saber quando lançar.",
@@ -817,15 +932,12 @@ function setLang(l) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
 }
 
-/* ─── Form (Google Sheets via Apps Script) ────────────────── */
+/* ─── Form (FormSubmit.co → emails hooky.crochet.app@gmail.com) ─── */
 /*
-  HOW TO SET UP (see docs/PROMOTION.md for full instructions):
-  1. Open Google Sheets → name it "Hooky iOS Waitlist"
-  2. Extensions → Apps Script → paste the script from PROMOTION.md
-  3. Deploy → Web App → Execute as Me → Anyone → copy the URL
-  4. Replace GOOGLE_SCRIPT_URL below with that URL
+  No backend needed. First-ever submission to a new address triggers a
+  one-time confirmation email to that inbox — click it once to activate.
 */
-const FORM_ENDPOINT = 'GOOGLE_SCRIPT_URL';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/hooky.crochet.app@gmail.com';
 
 document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -842,11 +954,9 @@ document.getElementById('waitlist-form').addEventListener('submit', async (e) =>
   try {
     await fetch(FORM_ENDPOINT, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({...d, lang, ts: new Date().toISOString()})
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({...d, lang, ts: new Date().toISOString(), form_type: 'ios_waitlist'})
     });
-    // no-cors means we can't read the response — assume success
     document.getElementById('form-wrap').style.display = 'none';
     const s = document.getElementById('form-success');
     s.classList.add('show');
