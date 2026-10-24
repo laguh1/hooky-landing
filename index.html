@@ -8,7 +8,6 @@
   <meta property="og:title" content="Hooky — Crochet &amp; Knitting Tracker">
   <meta property="og:description" content="Track every piece, from first stitch to sold. Free on Android.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -137,6 +136,15 @@
       .nav-links > a:not(.nav-cta) { font-size: 12px; }
       .nav-cta { padding: 7px 12px; font-size: 12px; }
     }
+    .cta-short { display: none; }
+    @media (max-width: 560px) {
+      .nav-inner { padding: 0 14px; gap: 8px; }
+      .nav-links > a:not(.nav-cta) { display: none; }
+      .nav-cta { white-space: nowrap; }
+      .cta-long { display: none; }
+      .cta-short { display: inline; }
+      .lang-btn { padding: 5px 8px; }
+    }
 
     /* ─── Hero ────────────────────────────────────────────── */
     .hero {
@@ -249,12 +257,48 @@
     .feat-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
     .feat-desc  { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
 
+    /* ─── Pro ─────────────────────────────────────────────── */
+    .pro { padding: 88px 24px; }
+    .pro-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center; margin-top: 8px;
+    }
+    @media (max-width: 860px) { .pro-grid { grid-template-columns: 1fr; gap: 36px; } }
+    .pro-badge {
+      display: inline-block; background: var(--purple); color: #fff;
+      font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 100px; margin-bottom: 14px;
+    }
+    .pro-list { list-style: none; margin: 24px 0; display: grid; gap: 12px; }
+    .pro-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 15px; color: var(--gray-900); line-height: 1.5;
+    }
+    .pro-list li::before {
+      content: '✓'; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--purple-tint); color: var(--purple);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; margin-top: 1px;
+    }
+    .pro-offer {
+      background: var(--purple-tint); border: 1px solid #f0abdc; border-radius: 12px;
+      padding: 14px 16px; font-size: 15px; font-weight: 600; color: var(--purple);
+      margin-bottom: 14px;
+    }
+    .pro-note { font-size: 14px; color: var(--gray-500); line-height: 1.7; }
+    .pro-shots { display: flex; gap: 16px; justify-content: center; }
+    .pro-shots img {
+      width: 48%; max-width: 300px; height: auto; border-radius: 14px;
+      border: 1px solid var(--gray-200); box-shadow: 0 8px 28px rgba(0,0,0,.10);
+    }
+    .pro-shots img:last-child { margin-top: 40px; }
+
     /* ─── Instructions ───────────────────────────────────── */
     .instructions { padding: 88px 24px; }
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px; margin-top: 52px;
+      gap: 20px; margin-top: 52px; align-items: start;
     }
     @media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; } }
     .step-card {
@@ -417,7 +461,8 @@
     </a>
     <div class="nav-links">
       <a href="#instructions" data-i18n="nav_how">How it works</a>
-      <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="nav-cta" data-i18n="nav_tester">Get it on Google Play</a>
+      <a href="#pro">Pro</a>
+      <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="nav-cta"><span class="cta-long" data-i18n="nav_tester">Get it on Google Play</span><span class="cta-short">Google Play</span></a>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
       <button id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()"></button>
@@ -474,7 +519,7 @@
               <div class="mock-card-row">
                 <div>
                   <div class="mock-title" data-i18n="mock_piece">Summer Shawl</div>
-                  <div class="mock-sub">In progress · 14h 30min</div>
+                  <div class="mock-sub" data-i18n="mock_piece_sub">14h 30min worked</div>
                 </div>
                 <img src="icons/ic_pieces.svg" width="18" height="18" style="opacity:.5" alt="">
               </div>
@@ -483,7 +528,7 @@
             <div class="mock-card mock-card-row">
               <div>
                 <div class="mock-title" data-i18n="mock_yarn">Yarn stash</div>
-                <div class="mock-sub">12 skeins · 3 brands</div>
+                <div class="mock-sub" data-i18n="mock_yarn_sub">12 skeins · 3 brands</div>
               </div>
               <img src="icons/ic_yarns.svg" width="20" height="20" style="opacity:.4" alt="">
             </div>
@@ -498,7 +543,7 @@
             <div class="mock-card mock-card-row">
               <div>
                 <div class="mock-title" data-i18n="mock_profit">Profit</div>
-                <div class="mock-sub">€28.50 materials → €65.00</div>
+                <div class="mock-sub" data-i18n="mock_profit_sub">€28.50 materials → €65.00</div>
               </div>
               <div class="mock-profit">+€36.50</div>
             </div>
@@ -514,7 +559,7 @@
   <div class="stats-inner">
     <div class="stat">
       <div class="stat-num">4</div>
-      <div class="stat-label" data-i18n="stat1">entity types — pieces, yarns, stitches, needles</div>
+      <div class="stat-label" data-i18n="stat1">things to organise — pieces, yarn, stitches, needles</div>
     </div>
     <div class="stat">
       <div class="stat-num">3</div>
@@ -536,7 +581,7 @@
   <div class="container centered">
     <p class="section-label" data-i18n="feat_label">Features</p>
     <h2 class="section-title" data-i18n="feat_title">Everything your craft needs</h2>
-    <p class="section-sub" data-i18n="feat_sub">Built by crafters, for crafters. No bloat, no ads, no login, no subscription for the basics.</p>
+    <p class="section-sub" data-i18n="feat_sub">Built by crafters, for crafters. No ads, no login, and everything you need to track your craft is free.</p>
     <div class="features-grid">
 
       <div class="feat-card">
@@ -544,7 +589,7 @@
           <img src="icons/ic_pieces.svg" alt="Pieces icon">
         </div>
         <div class="feat-title" data-i18n="f1_title">Project tracker</div>
-        <div class="feat-desc" data-i18n="f1_desc">Track every piece from cast-on to finished — status, dimensions, photos, and sale info all in one place. Duplicate similar pieces in one tap, or track quantity sold when you make several of the same item.</div>
+        <div class="feat-desc" data-i18n="f1_desc">Track every piece from cast-on to finished — status, dimensions, photos, yarn, stitches and sale info all in one place. Duplicate a similar piece in one tap.</div>
       </div>
 
       <div class="feat-card">
@@ -552,7 +597,7 @@
           <img src="icons/ic_yarns.svg" alt="Yarns icon">
         </div>
         <div class="feat-title" data-i18n="f2_title">Yarn stash</div>
-        <div class="feat-desc" data-i18n="f2_desc">Know exactly what yarn you have, how much, and where you bought it. No more mystery skeins.</div>
+        <div class="feat-desc" data-i18n="f2_desc">Point your camera at a yarn label and Hooky fills in brand, colour, material and weight. Know what you have before you buy more.</div>
       </div>
 
       <div class="feat-card">
@@ -568,7 +613,7 @@
           <img src="icons/ic_needles.svg" alt="Needles icon">
         </div>
         <div class="feat-title" data-i18n="f4_title">Needle tracker</div>
-        <div class="feat-desc" data-i18n="f4_desc">Know exactly which needles and hook sizes you own. Scan labels with your camera to add them instantly.</div>
+        <div class="feat-desc" data-i18n="f4_desc">Know exactly which hooks and needles you own, by type and size. Scan the size printed on a hook with your camera.</div>
       </div>
 
       <div class="feat-card">
@@ -583,10 +628,37 @@
         <div class="feat-icon-wrap">
           <img src="icons/ic_profit.svg" alt="Cost and profit icon">
         </div>
-        <div class="feat-title" data-i18n="f6_title">Cost &amp; profit</div>
-        <div class="feat-desc" data-i18n="f6_desc">See material costs, labour and profit margin per piece. Know exactly what your work is worth before you price it.</div>
+        <div class="feat-title" data-i18n="f6_title">Price calculator</div>
+        <div class="feat-desc" data-i18n="f6_desc">Enter material cost, hours and your hourly rate, pick complexity and margin, and Hooky suggests a fair price. Works in EUR, USD, GBP and BRL.</div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ─── Hooky Pro ─────────────────────────────────────────── -->
+<section class="pro" id="pro">
+  <div class="container">
+    <div class="pro-grid">
+      <div>
+        <span class="pro-badge">Hooky Pro</span>
+        <h2 class="section-title" data-i18n="pro_title">Selling your work? Meet Hooky Pro.</h2>
+        <p class="section-sub" data-i18n="pro_sub">Tools for makers who sell their work, on top of everything that's already free.</p>
+        <ul class="pro-list">
+          <li data-i18n="pro_f1">Cost &amp; profit reports, by piece and by customer</li>
+          <li data-i18n="pro_f2">Revenue by customer, shop or webpage — see who buys the most</li>
+          <li data-i18n="pro_f3">Batches: make and sell more than 1 of the same piece</li>
+          <li data-i18n="pro_f4">Extra counters on every piece</li>
+          <li data-i18n="pro_f5">More than 5 photos per piece</li>
+        </ul>
+        <div class="pro-offer" id="pro-offer-early" data-i18n="pro_offer_early">🎁 Install by 31 October and get Pro free for 12 months.</div>
+        <div class="pro-offer" id="pro-offer-trial" data-i18n="pro_offer_trial" style="display:none">🎁 New here? Try Pro free for 7 days, no card needed.</div>
+        <p class="pro-note" data-i18n="pro_note">One payment for 12 months, no automatic renewal. Unlock it in the app: Settings → Hooky Pro.</p>
+      </div>
+      <div class="pro-shots">
+        <img data-src-en="assets/pro-report-en.jpg" data-src-pt="assets/pro-report-pt.jpg" src="assets/pro-report-en.jpg" alt="Cost and profit report by piece" loading="lazy">
+        <img data-src-en="assets/pro-customers-en.jpg" data-src-pt="assets/pro-customers-pt.jpg" src="assets/pro-customers-en.jpg" alt="Cost and profit report by customer" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
@@ -602,8 +674,8 @@
         <div class="step-number">1</div>
         <div class="step-body">
           <div class="step-title" data-i18n="step1_title">Download Hooky</div>
-          <div class="step-desc" data-i18n="step1_desc">Download it for free from your app store. No account or login required — open the app and you're ready.</div>
-          <img class="step-preview" src="assets/play-store-early-access.jpg" alt="Hooky's Early Access listing on Google Play">
+          <div class="step-desc" data-i18n="step1_desc">Get it free on Google Play. No account or login required — open the app and you're ready.</div>
+          <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="btn btn-dark" style="margin-top:14px" data-i18n="cta_android">Download for Android</a>
         </div>
       </div>
       <div class="step-card">
@@ -611,23 +683,23 @@
         <div class="step-body">
           <div class="step-title" data-i18n="step2_title">Add your first piece</div>
           <div class="step-desc" data-i18n="step2_desc">Tap + on the Pieces tab. Give it a name, pick a type and status, add a photo. That's it — your project is tracked.</div>
-          <img class="step-preview" src="assets/step2-preview.jpg" alt="Hooky's Pieces list screen">
+          <img class="step-preview" data-src-en="assets/step-pieces-en.jpg" data-src-pt="assets/step-pieces-pt.jpg" src="assets/step-pieces-en.jpg" alt="Hooky's Pieces list screen" loading="lazy">
         </div>
       </div>
       <div class="step-card">
         <div class="step-number">3</div>
         <div class="step-body">
           <div class="step-title" data-i18n="step3_title">Log your yarn &amp; needles</div>
-          <div class="step-desc" data-i18n="step3_desc">Head to Yarns or Needles and add what you own. Scan label photos with your camera to fill in details automatically.</div>
-          <img class="step-preview" src="assets/step3-preview.jpg" alt="Hooky's Yarns list screen">
+          <div class="step-desc" data-i18n="step3_desc">Head to Yarns or Needles and add what you own. Point the camera at a yarn label and the details fill in by themselves.</div>
+          <img class="step-preview" data-src-en="assets/step-yarn-en.jpg" data-src-pt="assets/step-yarn-pt.jpg" src="assets/step-yarn-en.jpg" alt="A yarn filled in from its label scan" loading="lazy">
         </div>
       </div>
       <div class="step-card">
         <div class="step-number">4</div>
         <div class="step-body">
           <div class="step-title" data-i18n="step4_title">Track rows &amp; see your profit</div>
-          <div class="step-desc" data-i18n="step4_desc">Use the row counter and work timer while you craft. The cost &amp; profit calculator shows exactly what each piece is worth.</div>
-          <img class="step-preview" src="assets/step4-preview.jpg" alt="Hooky's Price Calculator screen showing suggested price">
+          <div class="step-desc" data-i18n="step4_desc">Use the row counter and work timer while you craft. The price calculator turns your hours and materials into a fair price.</div>
+          <img class="step-preview" data-src-en="assets/step-counter-en.jpg" data-src-pt="assets/step-counter-pt.jpg" src="assets/step-counter-en.jpg" alt="Row counter and work timer on a piece" loading="lazy">
         </div>
       </div>
     </div>
@@ -817,23 +889,34 @@ const T = {
     cta_android:"Download for Android", cta_iphone:"📱 iPhone? Join waitlist",
     mock_piece:"Summer Shawl", mock_status:"In progress",
     mock_yarn:"Yarn stash", mock_counter:"Row counter", mock_profit:"Profit",
-    stat1:"entity types — pieces, yarns, stitches, needles",
+    mock_piece_sub:"14h 30min worked", mock_yarn_sub:"12 skeins · 3 brands", mock_profit_sub:"€28.50 materials → €65.00",
+    stat1:"things to organise — pieces, yarn, stitches, needles",
     stat2:"languages — EN, ES, PT-BR",
     stat3:"offline · no account needed", stat4:"core features, always",
     feat_label:"Features", feat_title:"Everything your craft needs",
-    feat_sub:"Built by crafters, for crafters. No bloat, no ads, no login, no subscription for the basics.",
-    f1_title:"Project tracker", f1_desc:"Track every piece from cast-on to finished — status, dimensions, photos, and sale info all in one place. Duplicate similar pieces in one tap, or track quantity sold when you make several of the same item.",
-    f2_title:"Yarn stash", f2_desc:"Know exactly what yarn you have, how much, and where you bought it. No more mystery skeins.",
+    feat_sub:"Built by crafters, for crafters. No ads, no login, and everything you need to track your craft is free.",
+    f1_title:"Project tracker", f1_desc:"Track every piece from cast-on to finished — status, dimensions, photos, yarn, stitches and sale info all in one place. Duplicate a similar piece in one tap.",
+    f2_title:"Yarn stash", f2_desc:"Point your camera at a yarn label and Hooky fills in brand, colour, material and weight. Know what you have before you buy more.",
     f3_title:"Stitch library", f3_desc:"Save your favourite stitches with tutorial links, chart photos and difficulty ratings.",
-    f4_title:"Needle tracker", f4_desc:"Know exactly which needles and hook sizes you own. Scan labels with your camera to add them instantly.",
+    f4_title:"Needle tracker", f4_desc:"Know exactly which hooks and needles you own, by type and size. Scan the size printed on a hook with your camera.",
     f5_title:"Row counter & timer", f5_desc:"Tap, speak or type to count rows hands-free. Built-in work timer logs every minute and feeds the price calculator.",
-    f6_title:"Cost & profit", f6_desc:"See material costs, labour and profit margin per piece. Know exactly what your work is worth before you price it.",
+    f6_title:"Price calculator", f6_desc:"Enter material cost, hours and your hourly rate, pick complexity and margin, and Hooky suggests a fair price. Works in EUR, USD, GBP and BRL.",
+    pro_title:"Selling your work? Meet Hooky Pro.",
+    pro_sub:"Tools for makers who sell their work, on top of everything that's already free.",
+    pro_f1:"Cost & profit reports, by piece and by customer",
+    pro_f2:"Revenue by customer, shop or webpage — see who buys the most",
+    pro_f3:"Batches: make and sell more than 1 of the same piece",
+    pro_f4:"Extra counters on every piece",
+    pro_f5:"More than 5 photos per piece",
+    pro_offer_early:"🎁 Install by 31 October and get Pro free for 12 months.",
+    pro_offer_trial:"🎁 New here? Try Pro free for 7 days, no card needed.",
+    pro_note:"One payment for 12 months, no automatic renewal. Unlock it in the app: Settings → Hooky Pro.",
     inst_label:"Get started", inst_title:"From download to first project in minutes",
     inst_sub:"No account, no setup. Just install and start tracking.",
-    step1_title:"Download Hooky", step1_desc:"Download it for free from your app store. No account or login required — open the app and you're ready.",
+    step1_title:"Download Hooky", step1_desc:"Get it free on Google Play. No account or login required — open the app and you're ready.",
     step2_title:"Add your first piece", step2_desc:"Tap + on the Pieces tab. Give it a name, pick a type and status, add a photo. That's it — your project is tracked.",
-    step3_title:"Log your yarn & needles", step3_desc:"Head to Yarns or Needles and add what you own. Scan label photos with your camera to fill in details automatically.",
-    step4_title:"Track rows & see your profit", step4_desc:"Use the row counter and work timer while you craft. The cost & profit calculator shows exactly what each piece is worth.",
+    step3_title:"Log your yarn & needles", step3_desc:"Head to Yarns or Needles and add what you own. Point the camera at a yarn label and the details fill in by themselves.",
+    step4_title:"Track rows & see your profit", step4_desc:"Use the row counter and work timer while you craft. The price calculator turns your hours and materials into a fair price.",
     tut_label:"Tutorial", tut_title:"See Hooky in action",
     tut_sub:"Watch how crafters use Hooky to stay organized and price their work with confidence.",
     tut_soon:"Tutorial video coming soon",
@@ -857,38 +940,49 @@ const T = {
   es: {
     nav_how:"Cómo funciona", nav_tester:"Disponible en Google Play",
     badge:"Gratis en Android",
-    hero_title:"Registra cada punto.<br><em>De la primera vuelta a la venta.</em>",
+    hero_title:"Registra cada punto.<br><em>De la primera fila a la venta.</em>",
     hero_sub:"La app de crochet y tejido para quienes se toman en serio su oficio. Proyectos, lanas, puntos — todo en un solo lugar.",
     cta_android:"Descargar para Android", cta_iphone:"📱 ¿iPhone? Únete a la lista",
     mock_piece:"Chal de verano", mock_status:"En progreso",
-    mock_yarn:"Inventario de lanas", mock_counter:"Contador de vueltas", mock_profit:"Beneficio",
-    stat1:"tipos de entidades — piezas, lanas, puntos, agujas",
+    mock_yarn:"Inventario de lanas", mock_counter:"Contador de filas", mock_profit:"Beneficio",
+    mock_piece_sub:"14 h 30 min de trabajo", mock_yarn_sub:"12 ovillos · 3 marcas", mock_profit_sub:"28,50 € materiales → 65,00 €",
+    stat1:"cosas que organizar — piezas, lanas, puntos, agujas",
     stat2:"idiomas — EN, ES, PT-BR",
     stat3:"sin conexión · sin cuenta", stat4:"funciones básicas, siempre gratis",
     feat_label:"Funciones", feat_title:"Todo lo que tu artesanía necesita",
-    feat_sub:"Creada por y para quienes se toman en serio su oficio. Sin complicaciones, sin anuncios, sin cuenta, sin suscripción para lo básico.",
-    f1_title:"Seguimiento de proyectos", f1_desc:"Registra cada pieza desde el inicio hasta terminada — estado, dimensiones, fotos e información de venta. Duplica piezas similares con un toque, o controla la cantidad vendida cuando haces varias unidades del mismo artículo.",
-    f2_title:"Inventario de lanas", f2_desc:"Sabe exactamente qué lana tienes, cuánta y dónde la compraste. Sin más madejas misteriosas.",
+    feat_sub:"Creada por y para quienes se toman en serio su oficio. Sin anuncios, sin cuenta, y todo lo que necesitas para organizar tus labores es gratis.",
+    f1_title:"Seguimiento de proyectos", f1_desc:"Registra cada pieza desde el inicio hasta terminada — estado, medidas, fotos, lanas, puntos e información de venta. Duplica una pieza similar con un toque.",
+    f2_title:"Inventario de lanas", f2_desc:"Apunta la cámara a la etiqueta y Hooky rellena marca, color, material y peso. Sabe lo que tienes antes de comprar más.",
     f3_title:"Biblioteca de puntos", f3_desc:"Guarda tus puntos favoritos con enlaces a tutoriales, fotos de diagramas y nivel de dificultad.",
-    f4_title:"Gestión de agujas", f4_desc:"Sabe exactamente qué agujas y tamaños de ganchillo tienes. Escanea etiquetas con tu cámara para añadirlos al instante.",
-    f5_title:"Contador de vueltas y temporizador", f5_desc:"Toca, habla o escribe para contar vueltas con las manos libres. El temporizador integrado registra cada minuto y alimenta la calculadora de precios.",
-    f6_title:"Costes y beneficios", f6_desc:"Ve el coste de materiales, la mano de obra y el margen de beneficio por pieza. Sabe lo que realmente vale tu trabajo antes de ponerle precio.",
-    inst_label:"Cómo empezar", inst_title:"Del descargo a tu primer proyecto en minutos",
+    f4_title:"Gestión de agujas", f4_desc:"Sabe exactamente qué ganchillos y agujas tienes, por tipo y tamaño. Escanea con la cámara el tamaño impreso en el ganchillo.",
+    f5_title:"Contador de filas y temporizador", f5_desc:"Toca, habla o escribe para contar filas con las manos libres. El temporizador integrado registra cada minuto y alimenta la calculadora de precios.",
+    f6_title:"Calculadora de precios", f6_desc:"Introduce el coste del material, tus horas y tu precio por hora, elige complejidad y margen, y Hooky te sugiere un precio justo. Funciona en EUR, USD, GBP y BRL.",
+    pro_title:"¿Vendes tus creaciones? Conoce Hooky Pro.",
+    pro_sub:"Herramientas para quienes venden sus creaciones, además de todo lo que ya es gratis.",
+    pro_f1:"Informes de costes y beneficios, por pieza y por cliente",
+    pro_f2:"Ingresos por cliente, tienda o web — descubre quién compra más",
+    pro_f3:"Lotes: haz y vende más de 1 de la misma pieza",
+    pro_f4:"Contadores extra en cada pieza",
+    pro_f5:"Más de 5 fotos por pieza",
+    pro_offer_early:"🎁 Instala la app antes del 31 de octubre y tendrás Pro gratis durante 12 meses.",
+    pro_offer_trial:"🎁 ¿Recién llegas? Prueba Pro gratis durante 7 días, sin tarjeta.",
+    pro_note:"Un solo pago por 12 meses, sin renovación automática. Actívalo en la app: Ajustes → Hooky Pro.",
+    inst_label:"Cómo empezar", inst_title:"De la descarga a tu primer proyecto en minutos",
     inst_sub:"Sin cuenta, sin configuración. Solo instala y empieza a registrar.",
-    step1_title:"Descarga Hooky", step1_desc:"Descárgala gratis desde tu tienda de apps. Sin cuenta ni inicio de sesión — abre la app y ya estás listo para empezar.",
+    step1_title:"Descarga Hooky", step1_desc:"Descárgala gratis en Google Play. Sin cuenta ni inicio de sesión — abre la app y empieza.",
     step2_title:"Añade tu primera pieza", step2_desc:"Pulsa + en la pestaña Piezas. Dale un nombre, elige el tipo y estado, añade una foto. Listo — tu proyecto ya está registrado.",
-    step3_title:"Registra tus lanas y agujas", step3_desc:"Ve a Lanas o Agujas y añade lo que tienes. Escanea las etiquetas con tu cámara para rellenar los detalles automáticamente.",
-    step4_title:"Cuenta vueltas y ve tus beneficios", step4_desc:"Usa el contador de vueltas y el temporizador mientras trabajas. La calculadora de costes y beneficios muestra exactamente cuánto vale cada pieza.",
+    step3_title:"Registra tus lanas y agujas", step3_desc:"Ve a Lanas o Agujas y añade lo que tienes. Apunta la cámara a la etiqueta de la lana y los datos se rellenan solos.",
+    step4_title:"Cuenta filas y ve tus beneficios", step4_desc:"Usa el contador de filas y el temporizador mientras trabajas. La calculadora de precios convierte tus horas y materiales en un precio justo.",
     tut_label:"Tutorial", tut_title:"Hooky en acción",
     tut_sub:"Mira cómo quienes tejen y hacen crochet usan Hooky para organizarse y calcular el precio de su trabajo con confianza.",
     tut_soon:"Vídeo tutorial próximamente",
     wl_badge:"Próximamente en iPhone", wl_title:"Únete a la lista de espera para iOS",
-    wl_sub:"Estamos desarrollando la versión para iPhone. Deja tus datos y serás la primera en saber cuándo se lanza.",
+    wl_sub:"Estamos desarrollando la versión para iPhone. Deja tus datos y te avisaremos en cuanto se lance.",
     fl_name:"Nombre", fl_country:"País", fl_country_ph:"Seleccionar...",
     fl_whatsapp:"WhatsApp", fl_opt:"(opcional)", fl_wa_hint:"Incluye el código de país",
     fl_email:"Correo electrónico", fl_ig:"Instagram", fl_fb:"Facebook",
     fl_source:"¿Cómo conociste Hooky?", fl_src_ph:"Selecciona una opción...",
-    fl_src_ig:"Instagram", fl_src_fb:"Grupo de Facebook", fl_src_friend:"Un amigo/a me lo contó",
+    fl_src_ig:"Instagram", fl_src_fb:"Grupo de Facebook", fl_src_friend:"Me lo recomendaron",
     fl_src_google:"Búsqueda en Google", fl_src_yt:"YouTube", fl_src_other:"Otro", fl_other:"Otro",
     fl_note:"Se requiere al menos un contacto (WhatsApp, correo, Instagram o Facebook).",
     fl_submit:"Unirme a la lista de espera →",
@@ -902,38 +996,49 @@ const T = {
   pt: {
     nav_how:"Como funciona", nav_tester:"Disponível no Google Play",
     badge:"Grátis no Android",
-    hero_title:"Registre cada ponto.<br><em>Da primeira fileira à venda.</em>",
+    hero_title:"Registre cada ponto.<br><em>Da primeira carreira à venda.</em>",
     hero_sub:"O app de crochê e tricô para quem leva o artesanato a sério. Peças, fios, pontos — tudo em um só lugar.",
     cta_android:"Baixar para Android", cta_iphone:"📱 iPhone? Entre na lista",
     mock_piece:"Xale de verão", mock_status:"Em progresso",
-    mock_yarn:"Estoque de fios", mock_counter:"Contador de fileiras", mock_profit:"Lucro",
-    stat1:"tipos de itens — peças, fios, pontos, agulhas",
+    mock_yarn:"Estoque de fios", mock_counter:"Contador de carreiras", mock_profit:"Lucro",
+    mock_piece_sub:"14h 30min de trabalho", mock_yarn_sub:"12 novelos · 3 marcas", mock_profit_sub:"R$ 28,50 material → R$ 65,00",
+    stat1:"coisas para organizar — peças, fios, pontos, agulhas",
     stat2:"idiomas — EN, ES, PT-BR",
     stat3:"offline · sem cadastro", stat4:"funcionalidades básicas, sempre grátis",
     feat_label:"Funcionalidades", feat_title:"Tudo que o seu artesanato precisa",
-    feat_sub:"Criado por e para quem leva o seu ofício a sério. Sem enrolação, sem anúncios, sem cadastro, sem assinatura para o básico.",
-    f1_title:"Rastreador de projetos", f1_desc:"Registre cada peça do início ao fim — status, medidas, fotos e informações de venda em um só lugar. Duplique peças semelhantes com um toque, ou controle a quantidade vendida quando fizer várias unidades do mesmo item.",
-    f2_title:"Estoque de fios", f2_desc:"Saiba exatamente quais fios você tem, quanto e onde comprou. Chega de meadas misteriosas.",
-    f3_title:"Biblioteca de pontos", f3_desc:"Salve seus pontos favoritos com links para tutoriais, fotos de esquemas e nível de dificuldade.",
-    f4_title:"Gestão de agulhas", f4_desc:"Saiba exatamente quais agulhas e tamanhos de crochê você tem. Escaneie etiquetas com a câmera para adicioná-las instantaneamente.",
-    f5_title:"Contador de fileiras e cronômetro", f5_desc:"Toque, fale ou digite para contar fileiras sem usar as mãos. O cronômetro integrado registra cada minuto e alimenta a calculadora de preços.",
-    f6_title:"Custos e lucros", f6_desc:"Veja o custo de materiais, a mão de obra e a margem de lucro por peça. Saiba o valor real do seu trabalho antes de precificá-lo.",
+    feat_sub:"Criado por e para quem leva o seu ofício a sério. Sem anúncios, sem cadastro, e tudo o que você precisa para organizar seus trabalhos é grátis.",
+    f1_title:"Organizador de peças", f1_desc:"Registre cada peça do início ao fim — status, medidas, fotos, fios, pontos e informações de venda em um só lugar. Duplique uma peça parecida com um toque.",
+    f2_title:"Estoque de fios", f2_desc:"Aponte a câmera para a etiqueta e o Hooky preenche marca, cor, material e gramatura. Saiba o que você tem antes de comprar mais.",
+    f3_title:"Biblioteca de pontos", f3_desc:"Salve seus pontos favoritos com links para tutoriais, fotos de gráficos e nível de dificuldade.",
+    f4_title:"Gestão de agulhas", f4_desc:"Saiba exatamente quais agulhas de crochê e de tricô você tem, por tipo e tamanho. Escaneie com a câmera o tamanho gravado na agulha.",
+    f5_title:"Contador de carreiras e cronômetro", f5_desc:"Toque, fale ou digite para contar carreiras sem usar as mãos. O cronômetro integrado registra cada minuto e alimenta a calculadora de preços.",
+    f6_title:"Calculadora de preços", f6_desc:"Informe o custo do material, as horas e o valor da sua hora, escolha a complexidade e a margem, e o Hooky sugere um preço justo. Funciona em BRL, EUR, USD e GBP.",
+    pro_title:"Vende suas peças? Conheça o Hooky Pro.",
+    pro_sub:"Ferramentas para quem vende suas peças, além de tudo o que já é grátis.",
+    pro_f1:"Relatórios de custos e lucro, por peça e por cliente",
+    pro_f2:"Receita por cliente, loja ou site — veja quem compra mais",
+    pro_f3:"Lotes: faça e venda mais de 1 da mesma peça",
+    pro_f4:"Contadores extras em cada peça",
+    pro_f5:"Mais de 5 fotos por peça",
+    pro_offer_early:"🎁 Instale até 31 de outubro e ganhe o Pro grátis por 12 meses.",
+    pro_offer_trial:"🎁 Chegou agora? Experimente o Pro grátis por 7 dias, sem cartão.",
+    pro_note:"Um único pagamento por 12 meses, sem renovação automática. Ative no app: Configurações → Hooky Pro.",
     inst_label:"Como começar", inst_title:"Do download ao primeiro projeto em minutos",
     inst_sub:"Sem cadastro, sem configuração. Só instalar e começar a registrar.",
-    step1_title:"Baixe o Hooky", step1_desc:"Baixe gratuitamente na sua loja de apps. Sem cadastro ou login — abra o app e já está pronto.",
+    step1_title:"Baixe o Hooky", step1_desc:"Baixe grátis no Google Play. Sem cadastro ou login — é só abrir o app e começar.",
     step2_title:"Adicione sua primeira peça", step2_desc:"Toque em + na aba Peças. Dê um nome, escolha o tipo e status, adicione uma foto. Pronto — seu projeto está registrado.",
-    step3_title:"Registre seus fios e agulhas", step3_desc:"Vá a Fios ou Agulhas e adicione o que você tem. Escaneie as etiquetas com a câmera para preencher os detalhes automaticamente.",
-    step4_title:"Conte fileiras e veja seu lucro", step4_desc:"Use o contador de fileiras e o cronômetro enquanto trabalha. A calculadora de custos e lucros mostra exatamente quanto cada peça vale.",
+    step3_title:"Registre seus fios e agulhas", step3_desc:"Vá a Fios ou Agulhas e adicione o que você tem. Aponte a câmera para a etiqueta do fio e os dados se preenchem sozinhos.",
+    step4_title:"Conte carreiras e veja seu lucro", step4_desc:"Use o contador de carreiras e o cronômetro enquanto trabalha. A calculadora de preços transforma suas horas e materiais num preço justo.",
     tut_label:"Tutorial", tut_title:"Hooky em ação",
     tut_sub:"Veja como quem tricota e faz crochê usa o Hooky para se organizar e precificar o trabalho com confiança.",
     tut_soon:"Vídeo tutorial em breve",
     wl_badge:"Em breve no iPhone", wl_title:"Entre na lista de espera para iOS",
-    wl_sub:"Estamos desenvolvendo a versão para iPhone. Deixe seus dados e você será uma das primeiras a saber quando lançar.",
+    wl_sub:"Estamos desenvolvendo a versão para iPhone. Deixe seus dados e avisaremos assim que lançar.",
     fl_name:"Nome", fl_country:"País", fl_country_ph:"Selecionar...",
     fl_whatsapp:"WhatsApp", fl_opt:"(opcional)", fl_wa_hint:"Inclua o código do país",
     fl_email:"E-mail", fl_ig:"Instagram", fl_fb:"Facebook",
     fl_source:"Como você conheceu o Hooky?", fl_src_ph:"Selecione uma opção...",
-    fl_src_ig:"Instagram", fl_src_fb:"Grupo do Facebook", fl_src_friend:"Um amigo me indicou",
+    fl_src_ig:"Instagram", fl_src_fb:"Grupo do Facebook", fl_src_friend:"Alguém me indicou",
     fl_src_google:"Pesquisa no Google", fl_src_yt:"YouTube", fl_src_other:"Outro", fl_other:"Outro",
     fl_note:"Pelo menos um contato (WhatsApp, e-mail, Instagram ou Facebook) é obrigatório.",
     fl_submit:"Entrar na lista de espera →",
@@ -941,7 +1046,7 @@ const T = {
     contact_label:"Fale conosco", contact_title:"Dúvidas ou feedback?",
     contact_sub:"Adoraríamos ouvir você — relatos de bugs, ideias de funcionalidades ou qualquer outra coisa.",
     contact_name:"Nome", contact_email:"Seu e-mail", contact_message:"Mensagem", contact_submit:"Enviar mensagem →",
-    contact_suc_title:"Mensagem enviada!", contact_suc_sub:"Obrigado por entrar em contato — responderemos em breve.", contact_footer_link:"Contato",
+    contact_suc_title:"Mensagem enviada!", contact_suc_sub:"Recebemos sua mensagem — responderemos em breve.", contact_footer_link:"Contato",
     foot_craft:"Crafted with ♥",
   }
 };
@@ -979,7 +1084,19 @@ function setLang(l) {
   const videoId = TUTORIAL_VIDEO_IDS[l];
   if (videoFrame && videoId && !videoFrame.src.includes(videoId)) videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  // Screenshots exist in EN and PT; Spanish falls back to EN
+  document.querySelectorAll('img[data-src-en]').forEach(img => {
+    const src = l === 'pt' ? img.dataset.srcPt : img.dataset.srcEn;
+    if (src && !img.src.endsWith(src)) img.src = src;
+  });
 }
+
+/* ─── Pro offer: early-adopter gift until 31 Oct 2026, then the 7-day trial ─── */
+(function() {
+  const early = new Date() < new Date('2026-11-01T00:00:00');
+  document.getElementById('pro-offer-early').style.display = early ? '' : 'none';
+  document.getElementById('pro-offer-trial').style.display = early ? 'none' : '';
+})();
 
 /* ─── Form (FormSubmit.co → emails hooky.crochet.app@gmail.com) ─── */
 /*
@@ -1048,5 +1165,6 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
 
 setLang(detectLang());
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "810718fe19f64f04a71c187b596e45e2"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
