@@ -8,6 +8,11 @@
   <meta property="og:title" content="Hooky — Crochet &amp; Knitting Tracker">
   <meta property="og:description" content="Track every piece, from first stitch to sold. Free on Android.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hookyapp.netlify.app/">
+  <meta property="og:image" content="https://hookyapp.netlify.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://hookyapp.netlify.app/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -460,7 +465,7 @@
       </svg>
     </a>
     <div class="nav-links">
-      <a href="#instructions" data-i18n="nav_how">How it works</a>
+      <a href="guide.html" data-i18n="nav_guide">Guide</a>
       <a href="#pro">Pro</a>
       <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="nav-cta"><span class="cta-long" data-i18n="nav_tester">Get it on Google Play</span><span class="cta-short">Google Play</span></a>
     </div>
@@ -703,6 +708,7 @@
         </div>
       </div>
     </div>
+    <a href="guide.html" class="btn btn-outline" style="margin-top:32px" data-i18n="inst_guide">Read the full guide →</a>
   </div>
 </section>
 
@@ -858,7 +864,7 @@
     </g>
   </svg>
   <p class="footer-text" data-i18n="foot_craft">Crafted with ♥</p>
-  <p class="footer-text" style="margin-top:4px;color:rgba(255,255,255,.5)">© 2026 Hooky · <a href="privacy.html" style="color:rgba(255,255,255,.5);text-decoration:underline">Privacy Policy</a> · <a href="#contact" style="color:rgba(255,255,255,.5);text-decoration:underline" data-i18n="contact_footer_link">Contact</a></p>
+  <p class="footer-text" style="margin-top:4px;color:rgba(255,255,255,.5)">© 2026 Hooky · <a href="privacy.html" style="color:rgba(255,255,255,.5);text-decoration:underline">Privacy Policy</a> · <a href="guide.html" style="color:rgba(255,255,255,.5);text-decoration:underline" data-i18n="nav_guide">Guide</a> · <a href="#contact" style="color:rgba(255,255,255,.5);text-decoration:underline" data-i18n="contact_footer_link">Contact</a></p>
 </footer>
 
 <script>
@@ -882,7 +888,7 @@ function toggleTheme() {
 /* ─── Translations ────────────────────────────────────────── */
 const T = {
   en: {
-    nav_how:"How it works", nav_tester:"Get it on Google Play",
+    nav_how:"How it works", nav_guide:"Guide", inst_guide:"Read the full guide →", nav_tester:"Get it on Google Play",
     badge:"Free on Android",
     hero_title:"Track every stitch.<br><em>From first row to sold.</em>",
     hero_sub:"The crochet & knitting app for makers who take their craft seriously. Pieces, yarn stash, stitches — all in one place.",
@@ -938,7 +944,7 @@ const T = {
     foot_craft:"Crafted with ♥",
   },
   es: {
-    nav_how:"Cómo funciona", nav_tester:"Disponible en Google Play",
+    nav_how:"Cómo funciona", nav_guide:"Guía", inst_guide:"Ver la guía completa →", nav_tester:"Disponible en Google Play",
     badge:"Gratis en Android",
     hero_title:"Registra cada punto.<br><em>De la primera fila a la venta.</em>",
     hero_sub:"La app de crochet y tejido para quienes se toman en serio su oficio. Proyectos, lanas, puntos — todo en un solo lugar.",
@@ -994,7 +1000,7 @@ const T = {
     foot_craft:"Crafted with ♥",
   },
   pt: {
-    nav_how:"Como funciona", nav_tester:"Disponível no Google Play",
+    nav_how:"Como funciona", nav_guide:"Guia", inst_guide:"Ver o guia completo →", nav_tester:"Disponível no Google Play",
     badge:"Grátis no Android",
     hero_title:"Registre cada ponto.<br><em>Da primeira carreira à venda.</em>",
     hero_sub:"O app de crochê e tricô para quem leva o artesanato a sério. Peças, fios, pontos — tudo em um só lugar.",

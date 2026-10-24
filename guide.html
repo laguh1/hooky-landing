@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide — Hooky App</title>
+  <meta name="description" content="How to use Hooky App: row counter, work timer, yarn label scanner, stitch library, price calculator and Hooky Pro.">
+  <meta property="og:title" content="How to use Hooky App">
+  <meta property="og:description" content="Step-by-step guide to every feature of Hooky App, the crochet & knitting companion.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hookyapp.netlify.app/guide.html">
+  <meta property="og:image" content="https://hookyapp.netlify.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://hookyapp.netlify.app/og-image.jpg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>(function(){var t=localStorage.getItem('hooky_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Tokens (same as index.html) ─────────────────────── */
+    :root {
+      --purple:      #8C015E;
+      --purple-dark: #6f014b;
+      --purple-tint: #fdf2f8;
+      --slate:       #1E293B;
+      --white:       #ffffff;
+      --gray-50:     #f8fafc;
+      --gray-200:    #e2e8f0;
+      --gray-400:    #94a3b8;
+      --gray-500:    #64748b;
+      --gray-900:    #0f172a;
+    }
+    [data-theme="dark"] {
+      --white:       #0f172a;
+      --gray-50:     #1e293b;
+      --gray-200:    #334155;
+      --gray-500:    #94a3b8;
+      --gray-900:    #f1f5f9;
+      --purple-tint: rgba(140,1,94,.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white); color: var(--gray-900);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1, h2 { font-family: 'Playfair Display', Georgia, serif; }
+
+    /* ─── Nav ─────────────────────────────────────────────── */
+    nav { position: sticky; top: 0; z-index: 200; background: var(--purple); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      height: 64px; padding: 0 24px; max-width: 1100px; margin: 0 auto;
+    }
+    .logo img { display: block; height: 34px; width: auto; }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .nav-home { color: rgba(255,255,255,.85); font-size: 14px; font-weight: 600; margin-right: 6px; }
+    .nav-home:hover { color: #fff; }
+    .nav-cta {
+      background: #fff; color: var(--purple); padding: 8px 16px; border-radius: 100px;
+      font-size: 13px; font-weight: 700; white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    }
+    #theme-toggle {
+      background: rgba(255,255,255,.15); border: none; border-radius: 8px;
+      width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: #fff; flex-shrink: 0;
+    }
+    .lang-switcher { display: flex; gap: 2px; background: rgba(255,255,255,.15); border-radius: 9px; padding: 3px; }
+    .lang-btn {
+      background: none; border: none; cursor: pointer; padding: 5px 11px; border-radius: 7px;
+      font-size: 13px; font-weight: 600; color: rgba(255,255,255,.75); font-family: 'Inter', sans-serif;
+    }
+    .lang-btn.active { background: rgba(255,255,255,.9); color: var(--purple); }
+    @media (max-width: 560px) {
+      .nav-inner { padding: 0 14px; gap: 8px; }
+      .nav-home { display: none; }
+      .nav-cta { padding: 7px 12px; font-size: 12px; }
+      .lang-btn { padding: 5px 8px; }
+    }
+
+    /* ─── Header + contents ───────────────────────────────── */
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    header.guide-head { padding: 64px 0 32px; text-align: center; }
+    .label {
+      font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 10px;
+    }
+    header.guide-head h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; line-height: 1.15; margin-bottom: 14px; }
+    header.guide-head p { font-size: 17px; color: var(--gray-500); max-width: 560px; margin: 0 auto; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 28px; }
+    .toc a {
+      border: 1px solid var(--gray-200); background: var(--white); border-radius: 100px;
+      padding: 7px 14px; font-size: 13px; font-weight: 600; color: var(--gray-900);
+    }
+    .toc a:hover { border-color: var(--purple); color: var(--purple); }
+
+    /* ─── Sections ────────────────────────────────────────── */
+    .g-section {
+      border: 1px solid var(--gray-200); border-radius: 16px; background: var(--white);
+      padding: 28px; margin: 20px 0; scroll-margin-top: 80px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .g-grid { display: grid; grid-template-columns: 1fr 220px; gap: 32px; align-items: start; }
+    .g-section.no-img .g-grid { grid-template-columns: 1fr; }
+    @media (max-width: 680px) {
+      .g-section { padding: 22px 18px; }
+      .g-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+    .g-title { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .g-icon {
+      width: 44px; height: 44px; border-radius: 12px; background: var(--purple-tint);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .g-icon img {
+      width: 24px; height: 24px;
+      filter: invert(9%) sepia(90%) saturate(7000%) hue-rotate(310deg) brightness(70%);
+    }
+    .g-icon span { font-size: 20px; }
+    .g-title h2 { font-size: 24px; font-weight: 800; line-height: 1.2; }
+    .g-pro-tag {
+      display: inline-block; background: var(--purple); color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 2px 9px; border-radius: 100px;
+      vertical-align: middle; margin-left: 6px;
+    }
+    .g-intro { color: var(--gray-500); font-size: 15px; margin-bottom: 16px; }
+    .g-steps { counter-reset: step; list-style: none; display: grid; gap: 12px; }
+    .g-steps li {
+      counter-increment: step; display: flex; gap: 12px; align-items: flex-start;
+      font-size: 15px; line-height: 1.6;
+    }
+    .g-steps li::before {
+      content: counter(step); flex-shrink: 0; width: 26px; height: 26px; border-radius: 8px;
+      background: var(--purple); color: #fff; font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .g-tip {
+      margin-top: 18px; background: var(--gray-50); border-left: 3px solid var(--purple);
+      border-radius: 0 10px 10px 0; padding: 12px 14px; font-size: 14px; color: var(--gray-900);
+    }
+    .g-tip strong { color: var(--purple); }
+    .g-shot {
+      width: 100%; max-width: 220px; height: auto; border-radius: 12px; margin: 0 auto; display: block;
+      border: 1px solid var(--gray-200); box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+    .g-videos { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; }
+    .g-video {
+      width: 220px; aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--gray-200); background: #000;
+    }
+    .g-video iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* ─── Bottom CTA + footer ─────────────────────────────── */
+    .bottom-cta { text-align: center; padding: 40px 0 72px; }
+    .bottom-cta p { color: var(--gray-500); margin-bottom: 16px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; background: var(--slate); color: #fff;
+    }
+    [data-theme="dark"] .btn { background: #334155; color: #f1f5f9; }
+    footer { padding: 40px 24px; text-align: center; background: var(--purple); }
+    footer img { height: 30px; width: auto; margin: 0 auto 12px; display: block; }
+    footer p { font-size: 14px; color: rgba(255,255,255,.6); }
+    footer a { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="icons/wordmark-white.svg" alt="Hooky"></a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-home" data-i18n="nav_home">Home</a>
+      <a href="https://play.google.com/store/apps/details?id=com.laguh.hooky" class="nav-cta">Google Play</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()"></button>
+      <div class="lang-switcher" role="group" aria-label="Language">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" onclick="setLang('pt')">PT</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="guide-head">
+    <p class="label" data-i18n="head_label">Guide</p>
+    <h1 data-i18n="head_title">How to use Hooky App</h1>
+    <p data-i18n="head_sub">Every feature, step by step. Short videos are being added section by section.</p>
+    <div class="toc" id="toc"></div>
+  </header>
+
+  <main id="sections"></main>
+
+  <div class="bottom-cta">
+    <p data-i18n="cta_text">Still have a question? Write to us from the contact form.</p>
+    <a href="index.html#contact" class="btn" data-i18n="cta_btn">Contact us</a>
+  </div>
+</div>
+
+<footer>
+  <img src="icons/wordmark-white.svg" alt="Hooky">
+  <p>© 2026 Hooky · <a href="privacy.html">Privacy Policy</a> · <a href="index.html" data-i18n="nav_home">Home</a></p>
+</footer>
+
+<script>
+/* ─── Theme ──────────────────────────────────────────────── */
+const MOON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+const SUN  = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('hooky_theme', t);
+  document.getElementById('theme-toggle').innerHTML = t === 'dark' ? SUN : MOON;
+}
+function toggleTheme() {
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+applyTheme(localStorage.getItem('hooky_theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'));
+
+/* ─── Sections: order, icon, screenshot, feature Shorts ─────
+   img: base name in assets/ (-en.jpg / -pt.jpg; Spanish uses EN).
+   shorts: YouTube video IDs per language. Add an ID when a Short is published
+   and it appears in that section; leave empty until then. */
+const SECTIONS = [
+  { id: 'start',    icon: '👋' },
+  { id: 'pieces',   icon: 'icons/ic_pieces.svg',   img: 'step-pieces' },
+  { id: 'counter',  icon: 'icons/ic_counter.svg',  img: 'step-counter',   shorts: { pt: [], en: [], es: [] } },
+  { id: 'timer',    icon: 'icons/ic_timer.svg',                           shorts: { pt: [], en: [], es: [] } },
+  { id: 'yarn',     icon: 'icons/ic_yarns.svg',    img: 'step-yarn',      shorts: { pt: [], en: [], es: [] } },
+  { id: 'needles',  icon: 'icons/ic_needles.svg' },
+  { id: 'stitches', icon: 'icons/ic_stitches.svg', img: 'guide-stitches', shorts: { pt: [], en: [], es: [] } },
+  { id: 'price',    icon: 'icons/ic_profit.svg',   img: 'guide-calc',     shorts: { pt: [], en: [], es: [] } },
+  { id: 'pro',      icon: '✨',                     img: 'guide-batch',    pro: true },
+  { id: 'more',     icon: '🔍' },
+];
+
+// Early-adopter gift runs until 31 Oct 2026; after that new installs get the 7-day trial
+const EARLY = new Date() < new Date('2026-11-01T00:00:00');
+
+/* ─── Text ───────────────────────────────────────────────── */
+const T = {
+  en: {
+    doc_title: 'Guide — Hooky App',
+    nav_home: 'Home', head_label: 'Guide', head_title: 'How to use Hooky App',
+    head_sub: 'Every feature, step by step. Short videos are being added section by section.',
+    tip: 'Tip:', cta_text: 'Still have a question? Write to us from the contact form.', cta_btn: 'Contact us',
+    s: {
+      start: { t: 'Getting started', i: 'Hooky App works offline and needs no account. Install it, open it, and you\'re in.', st: [
+        'Get Hooky App free on Google Play and open it.',
+        'Use the five tabs at the bottom: Dashboard, Pieces, Yarns, Stitches and Needles.',
+        'Open Settings (gear icon, top right) to choose your language, currency (EUR, USD, GBP or BRL) and light or dark mode.',
+      ], tip: 'Everything is saved on your phone only. Nothing is sent to a server.' },
+      pieces: { t: 'Your pieces', i: 'A piece is anything you make: a shawl, a blanket, a bag, a toy.', st: [
+        'On the Pieces tab, tap +. Add a name, type and status. Everything else is optional.',
+        'Link the yarn, stitches and hook or needle you used, and add dates, dimensions and notes.',
+        'Add photos with the camera or from your gallery. Tap the pencil on a photo to rotate or flip it.',
+        'Mark it for you, for a gift or for sale, and follow it from in progress to finished.',
+        'Making something similar? Open the piece and tap Clone to copy it.',
+        'Tap Share to turn the piece into a clean image card for Instagram or WhatsApp.',
+      ], tip: 'The free version keeps up to 5 photos per piece. Hooky Pro removes the limit.' },
+      counter: { t: 'Row counter', i: 'Every piece has its own row counter, saved with the piece.', st: [
+        'Open a piece and scroll to Row Counter.',
+        'Tap + after every row, and − if you counted one too many.',
+        'Tap the number to type an exact count or set a target. A progress bar shows how far along you are.',
+        'Hands full? Tap the microphone and say a number out loud. The app adds that many rows.',
+      ], tip: 'For voice counting, make sure your phone has the voice pack for your language installed.' },
+      timer: { t: 'Work timer', i: 'Know how long a piece really took, without writing hours down.', st: [
+        'Open a piece and tap Start on the Work Timer when you pick up your hook or needles.',
+        'Pause and resume whenever you need. Tap Stop to save the session.',
+        'You can close the app: the timer keeps running and picks up where it left off.',
+      ], tip: 'After a few timed sessions with rows counted, Hooky shows your pace in minutes per 10 rows, so you can estimate how long the next piece will take.' },
+      yarn: { t: 'Yarn stash and label scanner', i: 'Keep all your yarn in one place, and let the camera do the typing.', st: [
+        'On the Yarns tab, tap +, then Scan Label.',
+        'Point the camera at the label, or pick a photo. Hooky reads the brand, weight, material and care instructions.',
+        'Check what was found, adjust if needed, and apply it. Label on two sides? Tap Scan another side.',
+        'Add a photo of the yarn: its colour is detected for you.',
+        'Bought the same yarn in another colour? Open it, tap Clone and change the colour.',
+      ], tip: 'Add the price, quantity and where you bought it, and you\'ll know what you have before buying more.' },
+      needles: { t: 'Hooks and needles', i: 'List your crochet hooks and knitting needles by type and size.', st: [
+        'On the Needles tab, tap +.',
+        'Pick the type, then tap the camera icon next to Size and point it at the size printed on the hook. Hooky fills it in.',
+        'Add the material, brand and notes if you like.',
+      ], tip: 'The same size scanner works for the recommended hook and needle sizes when you add a yarn.' },
+      stitches: { t: 'Stitch library', i: 'Save the stitches you love and find them again in seconds.', st: [
+        'On the Stitches tab, tap + and add the name, category and difficulty.',
+        'Add photos, tutorial links (YouTube or written) and notes.',
+        'In Stitch Chart, attach a photo or PDF of the chart.',
+        'Looking for inspiration? Open the Ideas tab for curated stitches and tutorials.',
+      ], tip: 'Search finds stitches, pieces, yarns and needles in one list.' },
+      price: { t: 'Price calculator', i: 'Stop guessing what to charge.', st: [
+        'Open the Price Calculator from the Dashboard, or from the calculator icon on the Pieces tab.',
+        'Enter the material cost, the hours worked and your hourly rate.',
+        'Choose the complexity and your profit margin. Hooky shows a suggested price with the full breakdown.',
+        'On a piece with hours logged, tap Suggest price → to price it from its own data.',
+      ], tip: 'Use the timer on every piece and the hours fill in by themselves.' },
+      pro: { t: 'Selling with Hooky Pro', i: 'The free version has everything you need to track your craft. Hooky Pro adds tools for makers who sell.', st: [
+        'When you sell a piece, add the sold price and who bought it in Customer / Shop / Webpage: a person, a market, Etsy… Hooky suggests names you used before.',
+        'Pro: on the Dashboard, tap View cost & profit report → to see revenue, cost and profit by piece and by customer.',
+        'Pro: making several of the same piece? Set Quantity above 1 to sell it as a batch, with cost and price per unit.',
+        'Pro: extra counters on every piece (repeats, increases, anything) and more than 5 photos per piece.',
+        'To unlock it, open Settings → Hooky Pro. One payment covers 12 months, with no automatic renewal.',
+      ], tip_early: 'Installed by 31 October? Pro is free for your first 12 months.', tip_trial: 'New here? Try Pro free for 7 days.' },
+      more: { t: 'Search and backup', i: 'Find anything fast, and keep your data safe.', st: [
+        'Tap the search icon to search pieces, yarns, stitches and needles at once.',
+        'Your data lives only on this phone. In Settings, tap Export backup and keep the file in your cloud storage or email.',
+        'New phone? Install Hooky App and use Import backup. It replaces the current data, so do it before adding anything new.',
+      ], tip: 'Export a backup after big changes.' },
+    },
+  },
+  es: {
+    doc_title: 'Guía — Hooky App',
+    nav_home: 'Inicio', head_label: 'Guía', head_title: 'Cómo usar Hooky App',
+    head_sub: 'Todas las funciones, paso a paso. Vamos añadiendo vídeos cortos sección por sección.',
+    tip: 'Consejo:', cta_text: '¿Te queda alguna duda? Escríbenos desde el formulario de contacto.', cta_btn: 'Contactar',
+    s: {
+      start: { t: 'Primeros pasos', i: 'Hooky App funciona sin conexión y no necesita cuenta. La instalas, la abres y listo.', st: [
+        'Descarga Hooky App gratis en Google Play y ábrela.',
+        'Usa las cinco pestañas de abajo: Inicio, Piezas, Lanas, Puntos y Agujas.',
+        'En Ajustes (el engranaje, arriba a la derecha) elige idioma, moneda (EUR, USD, GBP o BRL) y modo claro u oscuro.',
+      ], tip: 'Todo se guarda solo en tu móvil. No se envía nada a ningún servidor.' },
+      pieces: { t: 'Tus piezas', i: 'Una pieza es cualquier cosa que haces: un chal, una manta, un bolso, un amigurumi.', st: [
+        'En la pestaña Piezas, pulsa +. Ponle nombre, tipo y estado. Lo demás es opcional.',
+        'Vincula las lanas, los puntos y el ganchillo o la aguja que usaste, y añade fechas, medidas y notas.',
+        'Añade fotos con la cámara o desde la galería. Pulsa el lápiz de una foto para girarla o voltearla.',
+        'Marca si es para ti, para regalar o para vender, y síguela de en progreso a terminada.',
+        '¿Vas a hacer otra parecida? Abre la pieza y pulsa Clonar.',
+        'Pulsa Compartir para crear una tarjeta con la pieza para Instagram o WhatsApp.',
+      ], tip: 'La versión gratis guarda hasta 5 fotos por pieza. Hooky Pro quita el límite.' },
+      counter: { t: 'Contador de filas', i: 'Cada pieza tiene su propio contador, guardado con ella.', st: [
+        'Abre una pieza y baja hasta el Contador de filas.',
+        'Pulsa + después de cada fila, y − si contaste una de más.',
+        'Pulsa el número para escribir la cuenta exacta o fijar un objetivo. Una barra muestra cuánto te falta.',
+        '¿Manos ocupadas? Pulsa el micrófono y di un número en voz alta. La app suma esas filas.',
+      ], tip: 'Para contar con la voz, comprueba que tu móvil tiene instalado el paquete de voz de tu idioma.' },
+      timer: { t: 'Temporizador de trabajo', i: 'Sabe cuánto te llevó de verdad cada pieza, sin apuntar horas.', st: [
+        'Abre una pieza y pulsa Iniciar en el temporizador cuando cojas el ganchillo o las agujas.',
+        'Pausa y reanuda cuando quieras. Pulsa Parar para guardar la sesión.',
+        'Puedes cerrar la app: el temporizador sigue contando y continúa donde lo dejaste.',
+      ], tip: 'Tras unas cuantas sesiones con filas contadas, Hooky muestra tu ritmo en minutos por 10 filas, para que calcules cuánto te llevará la próxima pieza.' },
+      yarn: { t: 'Inventario de lanas y escáner de etiquetas', i: 'Todas tus lanas en un solo lugar, y la cámara escribe por ti.', st: [
+        'En la pestaña Lanas, pulsa + y luego Escanear etiqueta.',
+        'Apunta la cámara a la etiqueta o elige una foto. Hooky lee la marca, el peso, el material y las instrucciones de lavado.',
+        'Revisa lo que encontró, corrige si hace falta y aplícalo. ¿Etiqueta por los dos lados? Pulsa Escanear otro lado.',
+        'Añade una foto de la lana: el color se detecta solo.',
+        '¿Compraste la misma lana en otro color? Ábrela, pulsa Clonar y cambia el color.',
+      ], tip: 'Añade el precio, la cantidad y dónde la compraste, y sabrás lo que tienes antes de comprar más.' },
+      needles: { t: 'Ganchillos y agujas', i: 'Lista tus ganchillos y agujas de tejer por tipo y tamaño.', st: [
+        'En la pestaña Agujas, pulsa +.',
+        'Elige el tipo, pulsa el icono de la cámara junto a Tamaño y apunta al número impreso en el ganchillo. Hooky lo rellena.',
+        'Añade material, marca y notas si quieres.',
+      ], tip: 'El mismo escáner de tamaño funciona con los tamaños recomendados cuando añades una lana.' },
+      stitches: { t: 'Biblioteca de puntos', i: 'Guarda los puntos que te gustan y encuéntralos en segundos.', st: [
+        'En la pestaña Puntos, pulsa + y añade el nombre, la categoría y la dificultad.',
+        'Añade fotos, enlaces a tutoriales (YouTube o escritos) y notas.',
+        'En el apartado del diagrama, adjunta una foto o un PDF del diagrama.',
+        '¿Buscas inspiración? Abre la pestaña Ideas con puntos y tutoriales seleccionados.',
+      ], tip: 'El buscador encuentra puntos, piezas, lanas y agujas en una sola lista.' },
+      price: { t: 'Calculadora de precios', i: 'Deja de poner precios a ojo.', st: [
+        'Abre la Calculadora de precio desde Inicio o desde el icono de la calculadora en la pestaña Piezas.',
+        'Introduce el coste del material, las horas trabajadas y tu precio por hora.',
+        'Elige la complejidad y el margen de beneficio. Hooky te muestra un precio sugerido con todo el desglose.',
+        'En una pieza con horas registradas, pulsa Sugerir precio → para calcularlo con sus propios datos.',
+      ], tip: 'Usa el temporizador en cada pieza y las horas se rellenan solas.' },
+      pro: { t: 'Vender con Hooky Pro', i: 'La versión gratis tiene todo lo que necesitas para organizar tus labores. Hooky Pro añade herramientas para quienes venden.', st: [
+        'Cuando vendas una pieza, añade el precio de venta y quién la compró en Cliente / Tienda / Página web: una persona, un mercadillo, Etsy… Hooky te sugiere nombres que ya usaste.',
+        'Pro: en Inicio, pulsa Ver informe de costes y beneficios → para ver ingresos, costes y beneficio por pieza y por cliente.',
+        'Pro: ¿haces varias iguales? Pon una Cantidad mayor que 1 para venderlas como lote, con coste y precio por unidad.',
+        'Pro: contadores extra en cada pieza (repeticiones, aumentos, lo que quieras) y más de 5 fotos por pieza.',
+        'Para activarlo, abre Ajustes → Hooky Pro. Un solo pago cubre 12 meses, sin renovación automática.',
+      ], tip_early: '¿Instalaste la app antes del 31 de octubre? Tienes Pro gratis durante tus primeros 12 meses.', tip_trial: '¿Recién llegas? Prueba Pro gratis durante 7 días.' },
+      more: { t: 'Buscar y copia de seguridad', i: 'Encuentra cualquier cosa rápido y mantén tus datos a salvo.', st: [
+        'Pulsa la lupa para buscar piezas, lanas, puntos y agujas a la vez.',
+        'Tus datos están solo en este móvil. En Ajustes, pulsa Exportar copia de seguridad y guarda el archivo en tu nube o en tu correo.',
+        '¿Móvil nuevo? Instala Hooky App y usa Importar copia de seguridad. Sustituye los datos actuales, así que hazlo antes de añadir nada nuevo.',
+      ], tip: 'Exporta una copia después de cambios grandes.' },
+    },
+  },
+  pt: {
+    doc_title: 'Guia — Hooky App',
+    nav_home: 'Início', head_label: 'Guia', head_title: 'Como usar o Hooky App',
+    head_sub: 'Todas as funções, passo a passo. Estamos adicionando vídeos curtos seção por seção.',
+    tip: 'Dica:', cta_text: 'Ainda tem alguma dúvida? Escreva pra gente pelo formulário de contato.', cta_btn: 'Fale conosco',
+    s: {
+      start: { t: 'Primeiros passos', i: 'O Hooky App funciona offline e não precisa de cadastro. É só instalar e abrir.', st: [
+        'Baixe o Hooky App grátis no Google Play e abra.',
+        'Use as cinco abas embaixo: Painel, Peças, Fios, Pontos e Agulhas.',
+        'Em Configurações (a engrenagem, no alto à direita), escolha idioma, moeda (BRL, EUR, USD ou GBP) e modo claro ou escuro.',
+      ], tip: 'Tudo fica salvo só no seu celular. Nada é enviado para servidor nenhum.' },
+      pieces: { t: 'Suas peças', i: 'Uma peça é qualquer coisa que você faz: xale, manta, bolsa, amigurumi.', st: [
+        'Na aba Peças, toque em +. Dê um nome e escolha o tipo e o status. O resto é opcional.',
+        'Vincule os fios, os pontos e a agulha que você usou, e adicione datas, medidas e notas.',
+        'Adicione fotos com a câmera ou da galeria. Toque no lápis de uma foto para girar ou espelhar.',
+        'Marque se é para você, para presente ou para venda, e acompanhe de em andamento até concluída.',
+        'Vai fazer outra parecida? Abra a peça e toque em Clonar.',
+        'Toque em Compartilhar para criar um card da peça para o Instagram ou WhatsApp.',
+      ], tip: 'Na versão grátis cada peça guarda até 5 fotos. O Hooky Pro tira esse limite.' },
+      counter: { t: 'Contador de carreiras', i: 'Cada peça tem seu próprio contador, salvo junto com ela.', st: [
+        'Abra uma peça e role até o Contador de carreiras.',
+        'Toque em + a cada carreira, e em − se contou uma a mais.',
+        'Toque no número para digitar a contagem exata ou definir uma meta. Uma barra mostra quanto falta.',
+        'Mãos ocupadas? Toque no microfone e fale o número em voz alta. O app soma essas carreiras.',
+      ], tip: 'Para contar por voz, confira se o pacote de voz do seu idioma está instalado no celular.' },
+      timer: { t: 'Cronômetro de trabalho', i: 'Saiba quanto tempo cada peça levou de verdade, sem anotar horas.', st: [
+        'Abra uma peça e toque em Iniciar no cronômetro quando pegar a agulha.',
+        'Pause e retome quando quiser. Toque em Parar para salvar a sessão.',
+        'Pode fechar o app: o cronômetro continua contando e retoma de onde parou.',
+      ], tip: 'Depois de algumas sessões com carreiras contadas, o Hooky mostra seu ritmo em minutos por 10 carreiras, para você estimar quanto vai levar a próxima peça.' },
+      yarn: { t: 'Estoque de fios e scanner de etiqueta', i: 'Todos os seus fios num só lugar, e a câmera digita por você.', st: [
+        'Na aba Fios, toque em + e depois em Escanear etiqueta.',
+        'Aponte a câmera para a etiqueta ou escolha uma foto. O Hooky lê marca, gramatura, material e instruções de lavagem.',
+        'Confira o que foi encontrado, ajuste se precisar e aplique. Etiqueta dos dois lados? Toque em Escanear outro lado.',
+        'Adicione uma foto do fio: a cor é detectada sozinha.',
+        'Comprou o mesmo fio em outra cor? Abra o fio, toque em Clonar e troque a cor.',
+      ], tip: 'Anote o preço, a quantidade e onde comprou, e saiba o que você tem antes de comprar mais.' },
+      needles: { t: 'Agulhas de crochê e tricô', i: 'Liste suas agulhas por tipo e tamanho.', st: [
+        'Na aba Agulhas, toque em +.',
+        'Escolha o tipo, toque no ícone da câmera ao lado de Tamanho e aponte para o número gravado na agulha. O Hooky preenche.',
+        'Adicione material, marca e notas se quiser.',
+      ], tip: 'O mesmo scanner de tamanho funciona nos tamanhos de agulha recomendados quando você cadastra um fio.' },
+      stitches: { t: 'Biblioteca de pontos', i: 'Salve os pontos de que você gosta e encontre em segundos.', st: [
+        'Na aba Pontos, toque em + e adicione nome, categoria e dificuldade.',
+        'Adicione fotos, links de tutoriais (YouTube ou escritos) e notas.',
+        'Na parte do gráfico, anexe uma foto ou um PDF do gráfico do ponto.',
+        'Procurando inspiração? Abra a aba Ideias, com pontos e tutoriais selecionados.',
+      ], tip: 'A busca encontra pontos, peças, fios e agulhas numa lista só.' },
+      price: { t: 'Calculadora de preços', i: 'Chega de cobrar no chute.', st: [
+        'Abra a Calculadora de Preços pelo Painel ou pelo ícone de calculadora na aba Peças.',
+        'Informe o custo do material, as horas trabalhadas e o valor da sua hora.',
+        'Escolha a complexidade e a margem de lucro. O Hooky mostra o preço sugerido com todos os detalhes.',
+        'Numa peça com horas registradas, toque em Sugerir preço → para calcular com os dados dela.',
+      ], tip: 'Use o cronômetro em cada peça e as horas se preenchem sozinhas.' },
+      pro: { t: 'Vendendo com o Hooky Pro', i: 'A versão grátis tem tudo para organizar seus trabalhos. O Hooky Pro traz ferramentas para quem vende.', st: [
+        'Quando vender uma peça, informe o preço de venda e quem comprou em Cliente / Loja / Site: uma pessoa, uma feira, a Elo7… O Hooky sugere nomes que você já usou.',
+        'Pro: no Painel, toque em Ver relatório de custos e lucro → para ver receita, custo e lucro por peça e por cliente.',
+        'Pro: vai fazer várias iguais? Coloque Quantidade maior que 1 para vender em lote, com custo e preço por unidade.',
+        'Pro: contadores extras em cada peça (repetições, aumentos, o que quiser) e mais de 5 fotos por peça.',
+        'Para ativar, abra Configurações → Hooky Pro. Um único pagamento vale por 12 meses, sem renovação automática.',
+      ], tip_early: 'Instalou até 31 de outubro? O Pro é grátis nos seus primeiros 12 meses.', tip_trial: 'Chegou agora? Experimente o Pro grátis por 7 dias.' },
+      more: { t: 'Busca e cópia de segurança', i: 'Encontre tudo rápido e mantenha seus dados seguros.', st: [
+        'Toque na lupa para buscar peças, fios, pontos e agulhas de uma vez.',
+        'Seus dados ficam só neste celular. Em Configurações, toque em Exportar cópia de segurança e guarde o arquivo na nuvem ou no e-mail.',
+        'Celular novo? Instale o Hooky App e use Importar cópia de segurança. Ela substitui os dados atuais, então faça isso antes de cadastrar coisas novas.',
+      ], tip: 'Exporte uma cópia depois de mudanças grandes.' },
+    },
+  },
+};
+
+/* ─── Render ─────────────────────────────────────────────── */
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+function render(l) {
+  const t = T[l];
+  const imgLang = l === 'pt' ? 'pt' : 'en';
+  document.getElementById('toc').innerHTML = SECTIONS.map(s =>
+    `<a href="#${s.id}">${esc(t.s[s.id].t)}</a>`).join('');
+  document.getElementById('sections').innerHTML = SECTIONS.map(s => {
+    const c = t.s[s.id];
+    const icon = s.icon.endsWith('.svg') ? `<img src="${s.icon}" alt="">` : `<span>${s.icon}</span>`;
+    const tip = s.pro ? (EARLY ? c.tip_early : c.tip_trial) : c.tip;
+    const ids = (s.shorts && s.shorts[l]) || [];
+    const videos = ids.length ? `<div class="g-videos">${ids.map(id =>
+      `<div class="g-video"><iframe src="https://www.youtube.com/embed/${id}" title="${esc(c.t)}" loading="lazy" allowfullscreen></iframe></div>`).join('')}</div>` : '';
+    const shot = s.img ? `<img class="g-shot" src="assets/${s.img}-${imgLang}.jpg" alt="${esc(c.t)}" loading="lazy">` : '';
+    return `<section class="g-section${s.img ? '' : ' no-img'}" id="${s.id}">
+      <div class="g-grid">
+        <div>
+          <div class="g-title"><div class="g-icon">${icon}</div><h2>${esc(c.t)}${s.pro ? '<span class="g-pro-tag">PRO</span>' : ''}</h2></div>
+          <p class="g-intro">${esc(c.i)}</p>
+          <ol class="g-steps">${c.st.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
+          <p class="g-tip"><strong>${esc(t.tip)}</strong> ${esc(tip)}</p>
+          ${videos}
+        </div>
+        ${shot}
+      </div>
+    </section>`;
+  }).join('');
+}
+
+function setLang(l) {
+  localStorage.setItem('hooky_lang', l);
+  document.documentElement.lang = l === 'pt' ? 'pt-BR' : l;
+  const t = T[l];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t[el.getAttribute('data-i18n')];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.title = t.doc_title;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  render(l);
+  if (location.hash) { const el = document.querySelector(location.hash); if (el) el.scrollIntoView(); }
+}
+
+function detectLang() {
+  const s = localStorage.getItem('hooky_lang');
+  if (s && T[s]) return s;
+  const n = (navigator.language || 'en').toLowerCase();
+  if (n.startsWith('pt')) return 'pt';
+  if (n.startsWith('es')) return 'es';
+  return 'en';
+}
+
+setLang(detectLang());
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "810718fe19f64f04a71c187b596e45e2"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
