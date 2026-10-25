@@ -1116,6 +1116,18 @@ function setLang(l) {
 */
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/hooky.crochet.app@gmail.com';
 
+// FormSubmit answers 200 even when it did not deliver (e.g. before activation),
+// so check its own success flag; a throw shows the "try again" message.
+async function sendForm(data) {
+  const res = await fetch(FORM_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  const out = await res.json().catch(() => ({}));
+  if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || res.status);
+}
+
 document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.target;
@@ -1129,11 +1141,7 @@ document.getElementById('waitlist-form').addEventListener('submit', async (e) =>
   btn.disabled = true; btn.textContent = '...';
 
   try {
-    await fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify({...d, lang, ts: new Date().toISOString(), form_type: 'ios_waitlist'})
-    });
+    await sendForm({...d, lang, ts: new Date().toISOString(), form_type: 'ios_waitlist'});
     document.getElementById('form-wrap').style.display = 'none';
     const s = document.getElementById('form-success');
     s.classList.add('show');
@@ -1159,11 +1167,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
   btn.disabled = true; btn.textContent = '...';
 
   try {
-    await fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify({...d, lang, ts: new Date().toISOString()})
-    });
+    await sendForm({...d, lang, ts: new Date().toISOString()});
     document.getElementById('contact-form-wrap').style.display = 'none';
     document.getElementById('contact-form-success').classList.add('show');
   } catch {

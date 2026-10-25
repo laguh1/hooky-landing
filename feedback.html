@@ -417,7 +417,10 @@ document.getElementById('fb-form').addEventListener('submit', async (e) => {
         lang, source: params.get('src') || 'web', ts: new Date().toISOString(),
       })
     });
-    if (!res.ok) throw new Error(res.status);
+    // FormSubmit answers 200 even when it did not deliver (e.g. before activation),
+    // so check its own success flag
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || res.status);
     document.getElementById('fb-form-wrap').style.display = 'none';
     document.getElementById('fb-success').classList.add('show');
   } catch {
