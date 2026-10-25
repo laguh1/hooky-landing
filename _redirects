@@ -1,2 +1,6 @@
 # Short link to the Google Play listing (server-side, works in Instagram/Facebook in-app browsers)
 /play  https://play.google.com/store/apps/details?id=com.laguh.hooky&referrer=utm_source%3Dshortlink%26utm_medium%3Dsocial  302
+
+# Suggestions page, short and easy to say in a post
+/sugestoes  /feedback.html  301
+/sugerencias  /feedback.html  301

@@ -200,8 +200,8 @@
   <main id="sections"></main>
 
   <div class="bottom-cta">
-    <p data-i18n="cta_text">Still have a question? Write to us from the contact form.</p>
-    <a href="index.html#contact" class="btn" data-i18n="cta_btn">Contact us</a>
+    <p data-i18n="cta_text">Missing something, or have an idea? Tell us.</p>
+    <a href="feedback.html" class="btn" data-i18n="cta_btn">Send a suggestion</a>
   </div>
 </div>
 
@@ -250,7 +250,7 @@ const T = {
     doc_title: 'Guide — Hooky App',
     nav_home: 'Home', head_label: 'Guide', head_title: 'How to use Hooky App',
     head_sub: 'Every feature, step by step. Short videos are being added section by section.',
-    tip: 'Tip:', cta_text: 'Still have a question? Write to us from the contact form.', cta_btn: 'Contact us',
+    tip: 'Tip:', cta_text: 'Missing something, or have an idea? Tell us.', cta_btn: 'Send a suggestion',
     s: {
       start: { t: 'Getting started', i: 'Hooky App works offline and needs no account. Install it, open it, and you\'re in.', st: [
         'Get Hooky App free on Google Play and open it.',
@@ -318,7 +318,7 @@ const T = {
     doc_title: 'Guía — Hooky App',
     nav_home: 'Inicio', head_label: 'Guía', head_title: 'Cómo usar Hooky App',
     head_sub: 'Todas las funciones, paso a paso. Vamos añadiendo vídeos cortos sección por sección.',
-    tip: 'Consejo:', cta_text: '¿Te queda alguna duda? Escríbenos desde el formulario de contacto.', cta_btn: 'Contactar',
+    tip: 'Consejo:', cta_text: '¿Echas algo en falta o tienes una idea? Cuéntanoslo.', cta_btn: 'Enviar sugerencia',
     s: {
       start: { t: 'Primeros pasos', i: 'Hooky App funciona sin conexión y no necesita cuenta. La instalas, la abres y listo.', st: [
         'Descarga Hooky App gratis en Google Play y ábrela.',
@@ -386,7 +386,7 @@ const T = {
     doc_title: 'Guia — Hooky App',
     nav_home: 'Início', head_label: 'Guia', head_title: 'Como usar o Hooky App',
     head_sub: 'Todas as funções, passo a passo. Estamos adicionando vídeos curtos seção por seção.',
-    tip: 'Dica:', cta_text: 'Ainda tem alguma dúvida? Escreva pra gente pelo formulário de contato.', cta_btn: 'Fale conosco',
+    tip: 'Dica:', cta_text: 'Sentiu falta de algo ou tem uma ideia? Conte pra gente.', cta_btn: 'Enviar sugestão',
     s: {
       start: { t: 'Primeiros passos', i: 'O Hooky App funciona offline e não precisa de cadastro. É só instalar e abrir.', st: [
         'Baixe o Hooky App grátis no Google Play e abra.',
@@ -498,6 +498,9 @@ function setLang(l) {
 }
 
 function detectLang() {
+  // ?lang= comes from the link in the app's Help screen, so the guide matches the app language
+  const p = new URLSearchParams(location.search).get('lang');
+  if (p && T[p]) return p;
   const s = localStorage.getItem('hooky_lang');
   if (s && T[s]) return s;
   const n = (navigator.language || 'en').toLowerCase();
