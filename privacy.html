@@ -98,18 +98,25 @@
 
 <div class="content">
   <h1>Privacy Policy</h1>
-  <p class="effective">Effective date: October 2026</p>
+  <p class="effective">Effective date: 25 October 2026</p>
 
   <div class="highlight">
-    <p><strong>Short version:</strong> The Hooky Android app stores all data locally on your device — we never see it. The forms on this website (iOS waitlist, contact and suggestions) send us only what you choose to type, by email to our inbox. We do not sell, share, or monetise your data.</p>
+    <p><strong>Short version:</strong> Everything you enter in the Hooky App Android app (your pieces, yarns, stitches, photos and costs) stays on your device. We never see it. To unlock Hooky App Pro, the app contacts Google: Google Play handles purchases, and Firebase tells the app whether your install gets Pro for free. The label scanner reads text on your phone, and Google receives technical information about how it performed. The forms on this website send us only what you choose to type, by email. We do not sell, share or monetise your data.</p>
   </div>
 
   <h2>1. Who we are</h2>
   <p>Hooky is an independent crochet and knitting tracker app. For privacy questions, contact us at <a href="mailto:hooky.crochet.app@gmail.com">hooky.crochet.app@gmail.com</a>.</p>
 
   <h2>2. The Android app</h2>
-  <p>The Hooky Android app is <strong>fully offline and stores all data locally on your device</strong> using Android's internal storage (SQLite via Room). We do not have servers. We do not collect, transmit or have access to any data you enter in the app — your pieces, yarns, stitches, photos, costs, or any other information.</p>
-  <p>The app does not use analytics, advertising SDKs, crash reporters, or any network requests of its own.</p>
+  <p><strong>Your data stays on your device.</strong> Hooky App stores everything you enter (pieces, yarns, stitches, needles, photos, costs, notes) in the app's private storage on your phone. We do not have servers and we never receive this data. If you export a backup, the file is saved or shared only where you choose.</p>
+  <p><strong>When the app goes online.</strong> The app works offline. It connects to the internet only for these Google services:</p>
+  <ul>
+    <li><strong>Google Play Billing.</strong> If you buy Hooky App Pro, Google Play handles the payment. The app only receives Google's confirmation that Pro was bought, so it can unlock it on your devices. We never see your card or payment details. Google's privacy policy applies.</li>
+    <li><strong>Firebase (by Google).</strong> Firebase creates a random ID for your install of the app. This ID is not linked to your name, email or Google account. The app uses Firebase Remote Config to download the current Pro settings, such as the dates of a launch offer or the IDs of testers who get Pro for free, and checks them on your phone. Firebase receives the install ID and basic technical details of the request (app version, language, operating system). We use this only to decide whether Pro is unlocked. If you ask us for free tester access, you can send us this ID from Settings → Beta.</li>
+    <li><strong>Text recognition (Google ML Kit).</strong> When you scan a yarn label or a needle size, the text is read on your phone. The photo and the text found in it are not uploaded. Google Play Services, which provides this feature, sends Google technical information so Google can monitor and improve it: device details (manufacturer, model, operating system version), the app's name and version, device and per-install identifiers, and how the feature performed (for example speed, image size and error codes). We do not receive this information. See <a href="https://developers.google.com/ml-kit/android-data-disclosure" target="_blank" rel="noopener">Google's ML Kit data disclosure</a>.</li>
+  </ul>
+  <p><strong>Links.</strong> Links in the app (the guide, the suggestions page, tutorial links you saved) open in your browser.</p>
+  <p>The app has no advertising, and no analytics or crash-reporting tools of our own.</p>
 
   <h2>3. Forms on this website</h2>
   <p><strong>iOS waitlist.</strong> If you submit the iOS waitlist form, we collect the information you provide:</p>
@@ -131,7 +138,8 @@
   <p><strong>Gmail</strong> — the emails arrive in a Gmail inbox, so Google's privacy policy applies to them. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</p>
   <p><strong>Google Fonts</strong> — this website loads fonts from Google Fonts. Google may log the request (font file request, your IP, browser user-agent). No personal data from the form is shared with Google Fonts.</p>
   <p><strong>Cloudflare Web Analytics</strong> — this website counts visits with Cloudflare Web Analytics, which is cookie-free and does not track individual visitors. It records anonymous page views (page, referring site, country, browser type) so we know how many people visit. The app does not use it.</p>
-  <p>No advertising networks or tracking pixels are used on this website, and the app uses no analytics at all.</p>
+  <p><strong>Google Play Billing, Firebase and ML Kit</strong> (Android app only) — see section 2. Google's privacy policy applies: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</p>
+  <p>No advertising networks or tracking pixels are used on this website, and the app has no analytics of its own.</p>
 
   <h2>5. Cookies and local storage</h2>
   <p>This website uses <code>localStorage</code> (browser local storage) to remember your language preference. No cookies are set. No data is sent to any server for this purpose.</p>
@@ -144,6 +152,7 @@
     <li><strong>Delete</strong> your entry or message</li>
   </ul>
   <p>Email us at <a href="mailto:hooky.crochet.app@gmail.com">hooky.crochet.app@gmail.com</a> with the subject line "Data request". We will respond within 30 days. If you are in the EU/EEA, you also have the right to lodge a complaint with your local data protection authority.</p>
+  <p>The app's install ID is created on your device. Uninstalling the app, or clearing its data, removes it; a new one is made if you install again.</p>
 
   <h2>7. Data retention</h2>
   <p>Waitlist data is kept until the iOS version of Hooky launches and initial outreach is complete, or until you request deletion, whichever comes first. After outreach is done we will delete all waitlist records. Contact and suggestion messages are kept for as long as they help us answer you and improve the app, and deleted when you ask.</p>
